@@ -1,50 +1,59 @@
-# React + TypeScript + Vite
+# Personal Budgeting App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **React + TypeScript** application powered by **Vite**, designed for managing personal budgets. The app provides comprehensive CRUD operations for users, budgets, expenses, and expense categories. Authentication is handled via **CSRF tokens**, with a backend implemented in **Go**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- **CRUD Operations**:
+  - User management
+  - Budgets: Create, update, delete, and view budgets
+  - Expenses: Add, update, view, and delete expenses
+  - Expense Categories: Categorize and manage expense categories
+- **User Authentication**:
+  - Secure login and signup using CSRF tokens
+- **Modern Frontend**:
+  - Built with React and TypeScript for scalability and type safety
+  - Vite for a fast and optimized development experience
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## 🔮 Planned Enhancements
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **Budget Summary**:
+  - A detailed summary for each budget, including visualizations.
+- **Data Visualization**:
+  - Integration of a **pie chart** to provide an intuitive overview of budget distributions and spending.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+---
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## 🛠️ Tech Stack
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+### Frontend
+
+- **React**: Declarative UI components
+- **TypeScript**: Strong typing for better code reliability
+- **Vite**: Lightning-fast build tool
+
+### Backend
+
+- **Go**: Backend server handling authentication and data operations
+- **CSRF Tokens**: Secure user authentication mechanism
+
+---
+
+## 📂 File Structure
+
+The project is organized for maintainability and scalability:
+
+```plaintext
+src/
+├── components/       # Reusable UI components
+├── features/         # Feature-specific modules (e.g., budgets, expenses)
+├── hooks/            # Custom React hooks
+├── pages/            # Page-level components for routing
+├── services/         # API interaction and backend integration
+├── styles/           # Global and shared styles
+├── utils/            # Shared utility functions
 ```
