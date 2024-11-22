@@ -20,6 +20,7 @@ export type UserSignUp = {
   userId: string;
   userEmail: string;
   password: string;
+  repeatPassword: string;
   displayName: string;
   createdAt: string;
 };
