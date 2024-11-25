@@ -19,6 +19,7 @@ const userSlice = createAppSlice({
       state.createdAt = createdAt;
     },
     userLogin: (state: User, action: PayloadAction<UserLogIn>) => {
+      state.userId = action.payload.userId;
       state.userEmail = action.payload.userEmail;
       state.isAuthenticated = true;
     },

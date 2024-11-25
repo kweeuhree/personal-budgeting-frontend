@@ -26,6 +26,7 @@ export type UserSignUp = {
 };
 
 export type UserLogIn = {
+  userId: string;
   userEmail: string;
-  password: string;
+  password?: string;
 };
