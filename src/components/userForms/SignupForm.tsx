@@ -57,7 +57,6 @@ export const SignupForm: React.FC = () => {
       />
       <br />
       {errors.password && <span>This field is required</span>}
-      <br />
       <label htmlFor="repeatPassword">Repeat password:</label>
       <input
         id="repeatPassword"

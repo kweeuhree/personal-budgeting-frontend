@@ -45,8 +45,8 @@ export const { selectToken } = csrfSlice.selectors;
 export const csrfReducer = csrfSlice.reducer;
 
 export const fetchCsrfToken = createAsyncThunk("csrf/fetchToken", async () => {
-  console.log("Attempting fetchingn token");
-  const response = await fetch(`${baseUrl}/csrf-token/`, {
+  console.log("Attempting fetching token");
+  const response = await fetch(`${baseUrl}/api/csrf-token/`, {
     method: "GET",
     credentials: "include",
     headers: {
@@ -54,6 +54,6 @@ export const fetchCsrfToken = createAsyncThunk("csrf/fetchToken", async () => {
     },
   });
   const data = await response.json();
-  console.log(`Data fetched from go: ${data.csrf_token}`);
+
   return data.csrf_token;
 });
