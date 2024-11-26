@@ -10,6 +10,7 @@ import {
   authApi,
   budgetApi,
   expenseApi,
+  categoryApi,
   userReducer,
   csrfReducer,
   logger,
@@ -21,6 +22,7 @@ const rootReducer = combineSlices({
   [authApi.reducerPath]: authApi.reducer,
   [budgetApi.reducerPath]: budgetApi.reducer,
   [expenseApi.reducerPath]: expenseApi.reducer,
+  [categoryApi.reducerPath]: categoryApi.reducer,
 });
 // Infer the `RootState` type from the root reducer
 export type RootState = ReturnType<typeof rootReducer>;
@@ -37,7 +39,8 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
         .concat(logger)
         .concat(authApi.middleware)
         .concat(budgetApi.middleware)
-        .concat(expenseApi.middleware);
+        .concat(expenseApi.middleware)
+        .concat(categoryApi.middleware);
     },
     preloadedState,
   });
