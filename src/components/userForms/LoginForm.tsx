@@ -7,13 +7,13 @@ import { UserLogIn } from "../../types";
 
 export const LoginForm: React.FC = () => {
   const [login, { isLoading, error }] = useLoginMutation();
-  const { reset } = useForm<UserLogIn>();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<UserLogIn>();
 
