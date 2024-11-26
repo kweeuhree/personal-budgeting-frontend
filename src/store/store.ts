@@ -6,15 +6,13 @@ import {
 } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 
-import { logger } from "./middleware";
-import { authApi } from "./apis";
-import { userReducer } from "./slices";
-import { csrfReducer } from "./slices/csrfSlice";
+import { authApi, budgetApi, userReducer, csrfReducer, logger } from ".";
 
 const rootReducer = combineSlices({
   csrf: csrfReducer,
   user: userReducer,
   [authApi.reducerPath]: authApi.reducer,
+  [budgetApi.reducerPath]: budgetApi.reducer,
 });
 // Infer the `RootState` type from the root reducer
 export type RootState = ReturnType<typeof rootReducer>;

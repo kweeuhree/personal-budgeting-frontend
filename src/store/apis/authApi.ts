@@ -1,29 +1,6 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { baseUrl } from "./baseUrl";
-import { RootState, removeCsrfToken } from "..";
-
-// fetch csrf token during log in and store in csrf slice
-export const baseQueryWithCsrf = fetchBaseQuery({
-  baseUrl: `${baseUrl}/api/users`,
-  credentials: "include",
-  prepareHeaders: (headers, { getState }) => {
-    const state = getState() as RootState;
-    const csrfToken = state.csrf.token; // Get CSRF token from the Redux state
-    if (csrfToken) {
-      headers.set("X-CSRF-Token", csrfToken);
-    }
-    headers.set("Content-Type", "application/json");
-    return headers;
-  },
-  fetchFn: async (url, options) => {
-    console.log("Request URL:", url);
-    console.log("Request Options:", options);
-    return fetch(url, options).then((response) => {
-      console.log("Response:", response);
-      return response;
-    });
-  },
-});
+import { createApi } from "@reduxjs/toolkit/query/react";
+import { baseQueryWithCsrf } from "./baseQuery";
+import { removeCsrfToken } from "..";
 
 export const authApi = createApi({
   reducerPath: "auth",
@@ -31,21 +8,21 @@ export const authApi = createApi({
   endpoints: (builder) => ({
     signup: builder.mutation({
       query: (credentials) => ({
-        url: "/signup",
+        url: "users/signup",
         method: "POST",
         body: credentials,
       }),
     }),
     login: builder.mutation({
       query: (credentials) => ({
-        url: "/login",
+        url: "users/login",
         method: "POST",
         body: credentials,
       }),
     }),
     logout: builder.mutation({
       query: () => ({
-        url: "/logout",
+        url: "users/logout",
         method: "POST",
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
