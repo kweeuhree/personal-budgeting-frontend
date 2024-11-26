@@ -5,19 +5,19 @@ import { Provider } from "react-redux";
 
 import { store } from "./store";
 
-import { ErrorBoundary } from "./components";
+// import { ErrorBoundary } from "./components";
 import App from "./App.tsx";
 
 import "./index.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ErrorBoundary>
-      <Provider store={store}>
-        <Router>
-          <App />
-        </Router>
-      </Provider>
-    </ErrorBoundary>
+    {/* <ErrorBoundary> */}
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
+    {/* </ErrorBoundary> */}
   </StrictMode>
 );
