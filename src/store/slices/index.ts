@@ -1,5 +1,5 @@
 export * from "./budgetSlice";
-export * from "./expenseCategorySlice";
-export * from "./expensesSlice";
+export * from "./categorySlice";
+export * from "./expenseSlice";
 export * from "./userSlice";
 export * from "./csrfSlice";

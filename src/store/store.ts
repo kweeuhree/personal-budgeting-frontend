@@ -13,12 +13,18 @@ import {
   categoryApi,
   userReducer,
   csrfReducer,
+  budgetReducer,
+  expenseReducer,
+  categoryReducer,
   logger,
 } from ".";
 
 const rootReducer = combineSlices({
   csrf: csrfReducer,
   user: userReducer,
+  budget: budgetReducer,
+  expenses: expenseReducer,
+  categories: categoryReducer,
   [authApi.reducerPath]: authApi.reducer,
   [budgetApi.reducerPath]: budgetApi.reducer,
   [expenseApi.reducerPath]: expenseApi.reducer,
