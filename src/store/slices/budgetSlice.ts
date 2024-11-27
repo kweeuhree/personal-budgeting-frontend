@@ -37,11 +37,13 @@ const budgetSlice = createAppSlice({
   },
   selectors: {
     selectBudget: (state: Partial<Budget>): Partial<Budget> => state,
+    budgetExists: (state: Partial<Budget>): boolean =>
+      Object.keys(state).length !== 0,
   },
 });
 
 export const { budgetCreate, budgetDelete, budgetUpdate } = budgetSlice.actions;
 
-export const { selectBudget } = budgetSlice.selectors;
+export const { selectBudget, budgetExists } = budgetSlice.selectors;
 
 export const budgetReducer = budgetSlice.reducer;
