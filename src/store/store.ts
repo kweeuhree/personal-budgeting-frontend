@@ -6,18 +6,15 @@ import {
 } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 
+import { authApi, budgetApi, expenseApi, categoryApi } from "./apis";
+import { logger } from "./middleware";
 import {
-  authApi,
-  budgetApi,
-  expenseApi,
-  categoryApi,
   userReducer,
   csrfReducer,
   budgetReducer,
   expenseReducer,
   categoryReducer,
-  logger,
-} from ".";
+} from "./slices";
 
 const rootReducer = combineSlices({
   csrf: csrfReducer,
