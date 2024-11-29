@@ -31,7 +31,11 @@ export const LoginForm: React.FC = () => {
       }).unwrap();
       console.log("Login successful:", response);
       dispatch(
-        userLogin({ userId: response.userId, userEmail: response.email })
+        userLogin({
+          userId: response.userId,
+          userEmail: response.email,
+          displayName: response.displayName,
+        })
       );
       if (response.budget !== null) {
         dispatch(budgetUpdate(response.budget));

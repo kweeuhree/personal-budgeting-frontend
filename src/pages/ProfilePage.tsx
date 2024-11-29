@@ -14,6 +14,8 @@ export const ProfilePage = () => {
   const [deleteBudget, { error, isSuccess }] = useDeleteBudgetMutation();
   const { budgetId } = useAppSelector(selectBudget);
 
+  console.log("Display name", displayName);
+
   const greeting = `Hello, ${displayName || "friend"}!`;
 
   const handleDeleteBudget = () => {

@@ -21,6 +21,7 @@ const userSlice = createAppSlice({
     userLogin: (state: User, action: PayloadAction<UserLogIn>) => {
       state.userId = action.payload.userId;
       state.userEmail = action.payload.userEmail;
+      state.displayName = action.payload.displayName;
       state.isAuthenticated = true;
     },
     userLogout: () => {
