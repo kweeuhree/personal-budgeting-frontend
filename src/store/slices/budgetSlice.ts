@@ -2,14 +2,14 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { createAppSlice } from "../createAppSlice";
 
 interface Budget {
-  BudgetId: string;
-  UserId: string;
-  CheckingBalance: number;
-  SavingsBalance: number;
-  BudgetTotal: number;
-  BudgetRemaining: number;
-  TotalSpent: number;
-  UpdatedAt: string;
+  budgetId: string;
+  userId: string;
+  checkingBalance: number;
+  savingsBalance: number;
+  budgetTotal: number;
+  budgetRemaining: number;
+  totalSpent: number;
+  updatedAt: string;
 }
 
 export type PartialBudget = Partial<Budget>;
@@ -39,12 +39,11 @@ const budgetSlice = createAppSlice({
   },
   selectors: {
     selectBudget: (state: PartialBudget): PartialBudget => state,
-    isBudgetNotEmpty: (state: PartialBudget): boolean => state.budgetId !== "",
   },
 });
 
 export const { budgetCreate, budgetDelete, budgetUpdate } = budgetSlice.actions;
 
-export const { selectBudget, isBudgetNotEmpty } = budgetSlice.selectors;
+export const { selectBudget } = budgetSlice.selectors;
 
 export const budgetReducer = budgetSlice.reducer;
