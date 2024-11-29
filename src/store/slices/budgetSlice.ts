@@ -2,32 +2,34 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { createAppSlice } from "../createAppSlice";
 
 interface Budget {
-  budgetId: string;
-  userId: string;
-  checkingBalance: number;
-  savingsBalance: number;
-  budgetTotal: number;
-  budgetRemaining: number;
-  totalSpent: number;
-  updatedAt: string;
+  BudgetId: string;
+  UserId: string;
+  CheckingBalance: number;
+  SavingsBalance: number;
+  BudgetTotal: number;
+  BudgetRemaining: number;
+  TotalSpent: number;
+  UpdatedAt: string;
 }
 
+export type PartialBudget = Partial<Budget>;
+
 // allow to populate Budget gradually
-const initialState: Partial<Budget> = {};
+const initialState: PartialBudget = {};
 
 const budgetSlice = createAppSlice({
   name: "budget",
   initialState,
   reducers: {
     budgetCreate: (
-      state: Partial<Budget>,
-      action: PayloadAction<Partial<Budget>>
+      state: PartialBudget,
+      action: PayloadAction<PartialBudget>
     ) => {
       return { ...state, ...action.payload };
     },
     budgetUpdate: (
-      state: Partial<Budget>,
-      action: PayloadAction<Partial<Budget>>
+      state: PartialBudget,
+      action: PayloadAction<PartialBudget>
     ) => {
       return { ...state, ...action.payload };
     },
@@ -36,14 +38,13 @@ const budgetSlice = createAppSlice({
     },
   },
   selectors: {
-    selectBudget: (state: Partial<Budget>): Partial<Budget> => state,
-    budgetExists: (state: Partial<Budget>): boolean =>
-      Object.keys(state).length !== 0,
+    selectBudget: (state: PartialBudget): PartialBudget => state,
+    isBudgetNotEmpty: (state: PartialBudget): boolean => state.budgetId !== "",
   },
 });
 
 export const { budgetCreate, budgetDelete, budgetUpdate } = budgetSlice.actions;
 
-export const { selectBudget, budgetExists } = budgetSlice.selectors;
+export const { selectBudget, isBudgetNotEmpty } = budgetSlice.selectors;
 
 export const budgetReducer = budgetSlice.reducer;
