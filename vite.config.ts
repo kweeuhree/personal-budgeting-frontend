@@ -20,4 +20,9 @@ export default defineConfig({
   css: {
     postcss: "./postcss.config.js",
   },
+  test: {
+    globals: true, // Use global test functions (e.g., `describe`, `it`)
+    environment: "jsdom",
+    setupFiles: "./tests/setup.ts",
+  },
 });
