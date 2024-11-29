@@ -1,9 +1,20 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import { UnauthorizedLayout, DefaultLayout } from "./layouts";
-import { MainPage, NotFoundPage } from "./pages";
-import { ProtectedRoute, SignupForm, LoginForm } from "./components";
+import {
+  MainPage,
+  ExpensesPage,
+  CategoriesPage,
+  ProfilePage,
+  NotFoundPage,
+} from "./pages";
+import {
+  ProtectedRoute,
+  SignupForm,
+  LoginForm,
+  CreateExpenseForm,
+} from "./components";
 import { useAppDispatch, fetchCsrfToken, setCsrfToken } from "./store";
 
 import "./App.css";
@@ -37,6 +48,19 @@ function App() {
 
       <Route path="/budget" element={<DefaultLayout />}>
         <Route index element={<ProtectedRoute element={MainPage} />} />
+      </Route>
+
+      <Route path="/expenses" element={<DefaultLayout />}>
+        <Route index element={<ProtectedRoute element={ExpensesPage} />} />
+        <Route path="/expenses/create" element={<CreateExpenseForm />} />
+      </Route>
+
+      <Route path="/categories" element={<DefaultLayout />}>
+        <Route index element={<ProtectedRoute element={CategoriesPage} />} />
+      </Route>
+
+      <Route path="/profile" element={<DefaultLayout />}>
+        <Route index element={<ProtectedRoute element={ProfilePage} />} />
       </Route>
 
       {/* Catch-all for undefined routes */}
