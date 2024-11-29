@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 
-import { useLoginMutation, userLogin } from "../../store";
+import { budgetUpdate, useLoginMutation, userLogin } from "../../store";
 import { UserLogIn } from "../../types";
 
 export const LoginForm: React.FC = () => {
@@ -32,7 +32,10 @@ export const LoginForm: React.FC = () => {
       dispatch(
         userLogin({ userId: response.userId, userEmail: response.email })
       );
-      navigate("/auth");
+      if (response.budget) {
+        dispatch(budgetUpdate(response.budget));
+      }
+      navigate("/budget");
     } catch (err) {
       console.error("Login failed:", err);
     }
