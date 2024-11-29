@@ -35,7 +35,7 @@ function App() {
 
       {/* protected routes */}
 
-      <Route path="/auth" element={<DefaultLayout />}>
+      <Route path="/budget" element={<DefaultLayout />}>
         <Route index element={<ProtectedRoute element={MainPage} />} />
       </Route>
 
