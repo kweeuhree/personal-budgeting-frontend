@@ -1,3 +1,4 @@
+import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -32,7 +33,7 @@ export const LoginForm: React.FC = () => {
       dispatch(
         userLogin({ userId: response.userId, userEmail: response.email })
       );
-      if (response.budget) {
+      if (response.budget !== null) {
         dispatch(budgetUpdate(response.budget));
       }
       navigate("/budget");
