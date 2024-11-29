@@ -72,6 +72,10 @@ export const UpdateBudgetForm: React.FC<Props> = (props) => {
           type="number"
           {...register("balanceValue", {
             required: "This field is required",
+            min: {
+              value: 0,
+              message: "0 is the minimum amount to accept this input",
+            },
           })}
         />
         <fieldset>
@@ -87,7 +91,6 @@ export const UpdateBudgetForm: React.FC<Props> = (props) => {
             })}
           />
           <label htmlFor="CheckingBalance">Checking</label>
-          <br />
 
           <input
             id="SavingsBalance"
@@ -100,6 +103,7 @@ export const UpdateBudgetForm: React.FC<Props> = (props) => {
           />
           <label htmlFor="SavingsBalance">Savings</label>
         </fieldset>
+        <br />
 
         <fieldset>
           <legend>Update</legend>
@@ -107,11 +111,10 @@ export const UpdateBudgetForm: React.FC<Props> = (props) => {
             id="add"
             type="radio"
             value="add"
-            checked={true}
             {...register("update", { required: "Select an update type" })}
           />
           <label htmlFor="add">Add</label>
-          <br />
+
           <input
             id="subtract"
             type="radio"
@@ -119,7 +122,10 @@ export const UpdateBudgetForm: React.FC<Props> = (props) => {
             {...register("update", { required: "Select an update type" })}
           />
           <label htmlFor="subtract">Subtract</label>
+          <br />
+          {errors.update && "Select an update type"}
         </fieldset>
+        <br />
         <button type="button" onClick={handleCancelUpdate}>
           Cancel
         </button>
