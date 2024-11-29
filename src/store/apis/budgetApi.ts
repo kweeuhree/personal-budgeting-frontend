@@ -21,7 +21,7 @@ export const budgetApi = createApi({
     updateBudget: builder.mutation({
       query: ({ budgetId, updatedBudget }) => ({
         url: `budget/update/${budgetId}`,
-        method: "POST",
+        method: "PUT",
         body: updatedBudget,
       }),
     }),

@@ -8,12 +8,9 @@ import {
   useCreateBudgetMutation,
 } from "../../store";
 import { convertNumberToCents, convertStringToNumber } from "../../utils";
+import { type StringInput } from "../../types";
 
-type BudgetInput = {
-  [key: string]: string;
-};
-
-const processBudget = (newBudget: BudgetInput) => {
+const processBudget = (newBudget: StringInput) => {
   return Object.fromEntries(
     Object.entries(newBudget).map(([key, value]) => {
       const parsedValue = convertStringToNumber(value);
@@ -33,13 +30,13 @@ export const CreateBudgetForm: React.FC = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<BudgetInput>();
+  } = useForm<StringInput>();
 
-  const onSubmit: SubmitHandler<BudgetInput> = (budgetData) => {
+  const onSubmit: SubmitHandler<StringInput> = (budgetData) => {
     handleCreateBudget(budgetData);
   };
 
-  const handleCreateBudget = async (newBudget: BudgetInput) => {
+  const handleCreateBudget = async (newBudget: StringInput) => {
     try {
       console.log("Received new budget", newBudget);
       const processedBudget = processBudget(newBudget);
