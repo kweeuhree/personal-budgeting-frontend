@@ -3,7 +3,7 @@
     "jsx": "react",
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
     "target": "ES2022",
-    "lib": ["ES2023"],
+    "lib": ["ES2023", "dom"],
     "module": "ESNext",
     "skipLibCheck": true,
     "types": ["vitest/globals"],
