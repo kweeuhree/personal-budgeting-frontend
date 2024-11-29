@@ -1,9 +1,10 @@
-import { budgetExists, useAppSelector } from "../store";
 import { CreateBudgetForm } from "../components";
 import { BudgetPage } from ".";
+import { isBudgetNotEmpty, useAppSelector } from "../store";
 
 export const MainPage: React.FC = () => {
-  const doesBudgetExist = useAppSelector(budgetExists);
+  const budgetExists = useAppSelector(isBudgetNotEmpty);
+  console.log("does this user have a budget? -", budgetExists);
 
-  return doesBudgetExist ? <CreateBudgetForm /> : <BudgetPage />;
+  return budgetExists ? <BudgetPage /> : <CreateBudgetForm />;
 };
