@@ -17,6 +17,9 @@ const expenseSlice = createAppSlice({
   name: "expenses",
   initialState,
   reducers: {
+    addExpenses: (state: Expenses, action: PayloadAction<Expenses>) => {
+      state.push(...action.payload);
+    },
     createExpense: (state: Expenses, action: PayloadAction<Expense>) => {
       state.push(action.payload);
     },
@@ -39,7 +42,7 @@ const expenseSlice = createAppSlice({
   },
 });
 
-export const { createExpense, updateExpense, deleteExpense } =
+export const { createExpense, updateExpense, deleteExpense, addExpenses } =
   expenseSlice.actions;
 
 export const { selectAllExpenses, selectExpense } = expenseSlice.selectors;

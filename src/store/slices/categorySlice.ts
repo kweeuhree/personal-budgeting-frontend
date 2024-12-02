@@ -1,14 +1,7 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { createAppSlice } from "../createAppSlice";
 
-interface Category {
-  categoryId: string;
-  name: string;
-  description: string;
-  totalSum?: number;
-}
-
-type Categories = Category[];
+import { type Category, Categories } from "../../types";
 
 const initialState: Categories = [];
 
@@ -16,6 +9,9 @@ const categorySlice = createAppSlice({
   name: "categories",
   initialState,
   reducers: {
+    addCategories: (state: Categories, action: PayloadAction<Categories>) => {
+      state.push(...action.payload);
+    },
     createCategory: (state: Categories, action: PayloadAction<Category>) => {
       state.push(action.payload);
     },
@@ -31,7 +27,8 @@ const categorySlice = createAppSlice({
   },
 });
 
-export const { createCategory, deleteCategory } = categorySlice.actions;
+export const { createCategory, deleteCategory, addCategories } =
+  categorySlice.actions;
 
 export const { selectCategories, selectSpecificCategory } =
   categorySlice.selectors;
