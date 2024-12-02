@@ -10,6 +10,7 @@ import {
   selectBudget,
 } from "../../store";
 import { convertNumberToCents, convertStringToNumber } from "../../utils";
+import { AccountFieldset } from "../AccountFieldset";
 
 type Props = {
   balanceType: string;
@@ -78,7 +79,12 @@ export const UpdateBudgetForm: React.FC<Props> = (props) => {
             },
           })}
         />
-        <fieldset>
+        <AccountFieldset
+          balanceType={balanceType}
+          register={register}
+          errors={errors}
+        />
+        {/* <fieldset>
           <legend>Account</legend>
 
           <input
@@ -102,7 +108,7 @@ export const UpdateBudgetForm: React.FC<Props> = (props) => {
             })}
           />
           <label htmlFor="SavingsBalance">Savings</label>
-        </fieldset>
+        </fieldset> */}
         <br />
 
         <fieldset>
