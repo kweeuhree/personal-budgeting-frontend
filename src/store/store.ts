@@ -7,7 +7,7 @@ import {
 import { setupListeners } from "@reduxjs/toolkit/query";
 
 import { authApi, budgetApi, expenseApi, categoryApi } from "./apis";
-import { logger } from "./middleware";
+import { logger, listenerMiddleware } from "./middleware";
 import {
   userReducer,
   csrfReducer,
@@ -43,7 +43,8 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
         .concat(authApi.middleware)
         .concat(budgetApi.middleware)
         .concat(expenseApi.middleware)
-        .concat(categoryApi.middleware);
+        .concat(categoryApi.middleware)
+        .concat(listenerMiddleware.middleware);
     },
     preloadedState,
   });
