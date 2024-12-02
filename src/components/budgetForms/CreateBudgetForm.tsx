@@ -4,13 +4,14 @@ import { useForm, SubmitHandler } from "react-hook-form";
 
 import {
   budgetCreate,
+  PartialBudget,
   useAppDispatch,
   useCreateBudgetMutation,
 } from "../../store";
 import { convertNumberToCents, convertStringToNumber } from "../../utils";
 import { type StringInput } from "../../types";
 
-const processBudget = (newBudget: StringInput) => {
+const processBudget = (newBudget: StringInput): PartialBudget => {
   return Object.fromEntries(
     Object.entries(newBudget).map(([key, value]) => {
       const parsedValue = convertStringToNumber(value);
