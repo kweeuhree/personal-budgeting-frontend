@@ -52,7 +52,10 @@ function App() {
 
       <Route path="/expenses" element={<DefaultLayout />}>
         <Route index element={<ProtectedRoute element={ExpensesPage} />} />
-        <Route path="/expenses/create" element={<CreateExpenseForm />} />
+        <Route
+          path="/expenses/create"
+          element={<ProtectedRoute element={CreateExpenseForm} />}
+        />
       </Route>
 
       <Route path="/categories" element={<DefaultLayout />}>
