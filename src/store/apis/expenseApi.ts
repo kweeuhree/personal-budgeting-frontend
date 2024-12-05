@@ -11,27 +11,27 @@ export const expenseApi = createApi({
         method: "GET",
       }),
     }),
-    fetchExpense: builder.query({
+    expenseFetch: builder.query({
       query: (expenseId) => ({
         url: `expenses/view/${expenseId}`,
         method: "GET",
       }),
     }),
-    createExpense: builder.mutation({
+    expenseCreate: builder.mutation({
       query: (newExpense) => ({
         url: "expenses/create",
         method: "POST",
         body: newExpense,
       }),
     }),
-    updateExpense: builder.mutation({
+    expenseUpdate: builder.mutation({
       query: ({ expenseId, updatedExpense }) => ({
         url: `expenses/update/${expenseId}`,
-        method: "POST",
+        method: "PUT",
         body: updatedExpense,
       }),
     }),
-    deleteExpense: builder.mutation({
+    expenseDelete: builder.mutation({
       query: (expenseId) => ({
         url: `expenses/delete/${expenseId}`,
         method: "DELETE",
@@ -41,9 +41,9 @@ export const expenseApi = createApi({
 });
 
 export const {
-  useCreateExpenseMutation,
-  useDeleteExpenseMutation,
+  useExpenseCreateMutation,
+  useExpenseDeleteMutation,
+  useExpenseFetchQuery,
+  useExpenseUpdateMutation,
   useFetchAllExpensesQuery,
-  useFetchExpenseQuery,
-  useUpdateExpenseMutation,
 } = expenseApi;
