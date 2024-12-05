@@ -1,11 +1,12 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { createAppSlice } from "../createAppSlice";
+import { RESET_STORE_STATE } from "../actions";
 
 interface Expense {
   expenseId: string;
-  amount: number;
-  description: string;
-  categoryId: string;
+  amountInCents: number;
+  description?: string;
+  expenseCategoryId: string;
   createdAt: string;
 }
 
@@ -33,6 +34,9 @@ const expenseSlice = createAppSlice({
     deleteExpense: (state: Expenses, action: PayloadAction<string>) => {
       state.filter((exp) => exp.expenseId !== action.payload);
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(RESET_STORE_STATE, () => initialState);
   },
   selectors: {
     selectAllExpenses: (state: Expenses) => state,

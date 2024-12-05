@@ -1,6 +1,8 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { createAppSlice } from "../createAppSlice";
 
+import { RESET_STORE_STATE } from "../actions";
+
 interface Budget {
   budgetId: string;
   userId: string;
@@ -36,6 +38,9 @@ const budgetSlice = createAppSlice({
     budgetDelete: () => {
       return { ...initialState };
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(RESET_STORE_STATE, () => initialState);
   },
   selectors: {
     selectBudget: (state: PartialBudget): PartialBudget => state,

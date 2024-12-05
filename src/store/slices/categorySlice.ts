@@ -1,6 +1,7 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { createAppSlice } from "../createAppSlice";
 
+import { RESET_STORE_STATE } from "../actions";
 import { type Category, Categories } from "../../types";
 
 const initialState: Categories = [];
@@ -18,6 +19,9 @@ const categorySlice = createAppSlice({
     deleteCategory: (state: Categories, action: PayloadAction<Category>) => {
       state.filter((cat) => cat.categoryId !== action.payload.categoryId);
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(RESET_STORE_STATE, () => initialState);
   },
   selectors: {
     selectCategories: (state: Categories): Categories => state,
