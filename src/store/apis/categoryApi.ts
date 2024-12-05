@@ -17,7 +17,7 @@ export const categoryApi = createApi({
         method: "GET",
       }),
     }),
-    createCategory: builder.mutation({
+    categoryCreate: builder.mutation({
       query: (newCategory) => ({
         url: "categories/create",
         method: "POST",
@@ -35,7 +35,7 @@ export const categoryApi = createApi({
 
 export const {
   useCategoryDeleteMutation,
-  useCreateCategoryMutation,
+  useCategoryCreateMutation,
   useFetchAllCategoriesQuery,
   useFetchCategoryExpensesQuery,
 } = categoryApi;
