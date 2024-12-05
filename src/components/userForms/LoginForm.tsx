@@ -29,7 +29,6 @@ export const LoginForm: React.FC = () => {
         email: userData.userEmail,
         password: userData.password,
       }).unwrap();
-      console.log("Login successful:", response);
       dispatch(
         userLogin({
           userId: response.userId,
