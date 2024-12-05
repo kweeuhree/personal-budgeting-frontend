@@ -18,7 +18,6 @@ export const baseQueryWithCsrf = fetchBaseQuery({
   },
   fetchFn: async (url, options) => {
     console.log("Request URL:", url);
-    console.log("Request Options:", options);
     return fetch(url, options).then((response) => {
       console.log("Response:", response);
       return response;
