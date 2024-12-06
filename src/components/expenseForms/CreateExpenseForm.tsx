@@ -78,7 +78,9 @@ export const CreateExpenseForm: React.FC = () => {
       {isSuccess ? "Expense created" : error && "error"}
       <h1>Create Expense</h1>
       <form id="createExpenseForm" onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="description">Description</label>
+        <label htmlFor="description">
+          Description <span>(optional)</span>
+        </label>
         <input id="description" type="text" {...register("description", {})} />
         {errors.description && <span>{errors.description.toString()}</span>}
         <br />
@@ -121,31 +123,6 @@ export const CreateExpenseForm: React.FC = () => {
           errors={errors}
           name={"expenseType"}
         />
-        {/* <fieldset>
-          <legend>Account</legend>
-
-          <input
-            id="CheckingBalance"
-            type="radio"
-            value="CheckingBalance"
-            {...register("expenseType", {
-              required: "Select an account type",
-            })}
-          />
-          <label htmlFor="CheckingBalance">Checking</label>
-
-          <input
-            id="SavingsBalance"
-            type="radio"
-            value="SavingsBalance"
-            {...register("expenseType", {
-              required: "Select an account type",
-            })}
-          />
-          <label htmlFor="SavingsBalance">Savings</label>
-
-          {errors.balanceType && <span>{errors.balanceType.message}</span>}
-        </fieldset> */}
         <button type="button" onClick={handleNavigateToBudget}>
           Cancel
         </button>
