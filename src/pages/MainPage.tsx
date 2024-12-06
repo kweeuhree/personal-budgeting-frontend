@@ -1,5 +1,3 @@
-import React from "react";
-
 import { CreateBudgetForm } from "../components";
 import { BudgetPage } from ".";
 import { selectBudget, useAppSelector } from "../store";
