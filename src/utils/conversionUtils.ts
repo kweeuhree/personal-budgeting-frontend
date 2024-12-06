@@ -6,10 +6,15 @@ export const convertStringToNumber = (value: string): number =>
 export const convertNumberToCents = (value: number): number =>
   Math.round(value * 100);
 
+export const convertStringtoCents = (value: string): number => {
+  const numberValue = convertStringToNumber(value);
+  return convertNumberToCents(numberValue);
+};
+
 export const formatBudget = (budget: PartialBudget) => {
   return Object.fromEntries(
     Object.entries(budget).map(([key, value]) => {
-      return [key, separateCents(value)];
+      return [key, separateCents(value as number)];
     })
   );
 };
