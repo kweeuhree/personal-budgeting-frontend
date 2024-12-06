@@ -16,10 +16,8 @@ const categorySlice = createAppSlice({
     createCategory: (state: Categories, action: PayloadAction<Category>) => {
       state.push(action.payload);
     },
-    deleteCategory: (state: Categories, action: PayloadAction<Category>) => {
-      state.filter(
-        (cat) => cat.expenseCategoryId !== action.payload.expenseCategoryId
-      );
+    deleteCategory: (state: Categories, action: PayloadAction<string>) => {
+      state.filter((cat) => cat.expenseCategoryId !== action.payload);
     },
   },
   extraReducers: (builder) => {
