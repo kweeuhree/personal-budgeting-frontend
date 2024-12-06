@@ -1,16 +1,7 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { createAppSlice } from "../createAppSlice";
 import { RESET_STORE_STATE } from "../actions";
-
-interface Expense {
-  expenseId: string;
-  amountInCents: number;
-  description?: string;
-  expenseCategoryId: string;
-  createdAt: string;
-}
-
-type Expenses = Expense[];
+import { type Expenses, type Expense } from "../../types";
 
 const initialState: Expenses = [];
 
