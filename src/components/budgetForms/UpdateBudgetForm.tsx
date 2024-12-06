@@ -9,7 +9,7 @@ import {
   useAppSelector,
   selectBudget,
 } from "../../store";
-import { convertNumberToCents, convertStringToNumber } from "../../utils";
+import { convertStringtoCents } from "../../utils";
 import { AccountFieldset } from "../AccountFieldset";
 
 type Props = {
@@ -31,15 +31,11 @@ export const UpdateBudgetForm: React.FC<Props> = (props) => {
   } = useForm<StringInput>();
 
   const onSubmit: SubmitHandler<StringInput> = (budgetData) => {
-    console.log("si sire");
     handleUpdateBudget(budgetData);
   };
 
   const handleUpdateBudget = async (budgetData: StringInput) => {
-    console.log("Received new budget data", budgetData);
-    const numberValue = convertStringToNumber(budgetData.balanceValue);
-    const updateValue = convertNumberToCents(numberValue);
-    console.log("Update value:", updateValue);
+    const updateValue = convertStringtoCents(budgetData.balanceValue);
 
     try {
       const updatedBudget = await updateBudget({
@@ -49,13 +45,16 @@ export const UpdateBudgetForm: React.FC<Props> = (props) => {
           balanceType,
           updateType: budgetData.update,
         },
-      });
-      console.log(updatedBudget);
-      dispatch(budgetUpdate(updatedBudget.data));
+      }).unwrap();
+
+      dispatch(budgetUpdate(updatedBudget));
+
       reset();
       setEditMode(false);
     } catch (error) {
-      throw new Error("Failed to update budget");
+      throw new Error(
+        `Failed to update budget: ${error instanceof Error ? error.message : "Unknown error."}`
+      );
     }
   };
 
@@ -81,34 +80,10 @@ export const UpdateBudgetForm: React.FC<Props> = (props) => {
         />
         <AccountFieldset
           balanceType={balanceType}
+          name={"balanceType"}
           register={register}
           errors={errors}
         />
-        {/* <fieldset>
-          <legend>Account</legend>
-
-          <input
-            id="CheckingBalance"
-            type="radio"
-            value="Checking"
-            checked={balanceType === "CheckingBalance" && true}
-            {...register("balanceType", {
-              required: "Select an account type",
-            })}
-          />
-          <label htmlFor="CheckingBalance">Checking</label>
-
-          <input
-            id="SavingsBalance"
-            type="radio"
-            value="Savings"
-            checked={balanceType === "SavingsBalance" && true}
-            {...register("balanceType", {
-              required: "Select an account type",
-            })}
-          />
-          <label htmlFor="SavingsBalance">Savings</label>
-        </fieldset> */}
         <br />
 
         <fieldset>
