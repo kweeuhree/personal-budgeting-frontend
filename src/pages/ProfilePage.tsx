@@ -1,4 +1,3 @@
-import React from "react";
 import {
   budgetDelete,
   selectBudget,
@@ -26,7 +25,9 @@ export const ProfilePage = () => {
         deleteBudget(budgetId);
         dispatch(budgetDelete());
       } catch (error) {
-        throw new Error("Failed deleting budget");
+        throw new Error(
+          `Failed deleting budget: ${error instanceof Error ? error.message : "Unknown error."}`
+        );
       }
     }
     return;
