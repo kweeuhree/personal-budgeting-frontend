@@ -6,3 +6,4 @@ export * from "./budgetForms";
 export * from "./expenseForms";
 export * from "./AccountFieldset";
 export * from "./CategoriesDropdown";
+export * from "./Expenses";
