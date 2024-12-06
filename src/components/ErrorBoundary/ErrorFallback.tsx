@@ -12,8 +12,9 @@ export const ErrorFallback: React.FC<Props> = ({ error }) => {
     <div role="alert">
       <h2>Oops! Something went wrong.</h2>
       <p>{error instanceof Error && error.message}</p>
-      {/* ImageContainer takes thisClass props */}
-      {/* <ImageContainer src={errorUI.src} alt={errorUI.alt} /> */}
+      <div>
+        <img src={errorUI.src} alt={errorUI.alt} />
+      </div>
       <button onClick={() => window.location.reload()}>Reload</button>
     </div>
   );
