@@ -2,7 +2,12 @@ import { createListenerMiddleware } from "@reduxjs/toolkit";
 import { createLogger } from "redux-logger";
 
 import { categoryApi, expenseApi, authApi } from "./apis";
-import { addCategories, addExpenses } from "./slices";
+import {
+  addCategories,
+  addExpenses,
+  budgetDelete,
+  deleteAllExpenses,
+} from "./slices";
 import { resetStoreState } from "./actions";
 
 export const logger = createLogger({
@@ -69,5 +74,13 @@ listenerMiddleware.startListening({
         `Failed to fetch additional user information: ${error instanceof Error ? error.message : "Unknown error."}`
       );
     }
+  },
+});
+
+// listen for budget reset and reset expenses
+listenerMiddleware.startListening({
+  actionCreator: budgetDelete,
+  effect: (_, { dispatch }) => {
+    dispatch(deleteAllExpenses());
   },
 });

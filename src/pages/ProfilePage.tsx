@@ -19,7 +19,7 @@ export const ProfilePage = () => {
 
   const handleDeleteBudget = () => {
     const confirmStmt =
-      "This action cannot be undone. Are you sure that you want to reset budget?";
+      "This action cannot be undone. Are you sure that you want to reset budget and expenses?";
     if (confirm(confirmStmt)) {
       try {
         deleteBudget(budgetId);

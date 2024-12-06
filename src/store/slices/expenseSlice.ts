@@ -25,6 +25,9 @@ const expenseSlice = createAppSlice({
     deleteExpense: (state: Expenses, action: PayloadAction<string>) => {
       state.filter((exp) => exp.expenseId !== action.payload);
     },
+    deleteAllExpenses: () => {
+      return { ...initialState };
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(RESET_STORE_STATE, () => initialState);
@@ -37,8 +40,13 @@ const expenseSlice = createAppSlice({
   },
 });
 
-export const { createExpense, updateExpense, deleteExpense, addExpenses } =
-  expenseSlice.actions;
+export const {
+  createExpense,
+  updateExpense,
+  deleteExpense,
+  addExpenses,
+  deleteAllExpenses,
+} = expenseSlice.actions;
 
 export const { selectAllExpenses, selectExpense } = expenseSlice.selectors;
 
