@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 
@@ -49,7 +48,9 @@ export const CreateBudgetForm: React.FC = () => {
       navigate("/budget");
     } catch (error) {
       console.log(typeof error);
-      throw new Error("Failed to create budget");
+      throw new Error(
+        `Failed to create budget: ${error instanceof Error ? error.message : "Unknown error."}`
+      );
     }
   };
 
