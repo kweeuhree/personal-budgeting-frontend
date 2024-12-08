@@ -19,6 +19,38 @@ const categorySlice = createAppSlice({
     deleteCategory: (state: Categories, action: PayloadAction<string>) => {
       state.filter((cat) => cat.expenseCategoryId !== action.payload);
     },
+    incrementCategoryExpenses: (
+      state: Categories,
+      action: PayloadAction<{
+        expenseCategoryId: string;
+        amountInCents: number;
+      }>
+    ) => {
+      const { expenseCategoryId, amountInCents } = action.payload;
+      const found = state.find(
+        (cat) => cat.expenseCategoryId === expenseCategoryId
+      );
+
+      if (found) {
+        found.totalSum += amountInCents;
+      }
+    },
+    decrementCategoryExpenses: (
+      state: Categories,
+      action: PayloadAction<{
+        expenseCategoryId: string;
+        amountInCents: number;
+      }>
+    ) => {
+      const { expenseCategoryId, amountInCents } = action.payload;
+      const found = state.find(
+        (cat) => cat.expenseCategoryId === expenseCategoryId
+      );
+
+      if (found) {
+        found.totalSum -= amountInCents;
+      }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(RESET_STORE_STATE, () => initialState);
@@ -31,8 +63,13 @@ const categorySlice = createAppSlice({
   },
 });
 
-export const { createCategory, deleteCategory, addCategories } =
-  categorySlice.actions;
+export const {
+  createCategory,
+  deleteCategory,
+  addCategories,
+  incrementCategoryExpenses,
+  decrementCategoryExpenses,
+} = categorySlice.actions;
 
 export const { selectCategories, selectSpecificCategory } =
   categorySlice.selectors;

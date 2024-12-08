@@ -2,7 +2,7 @@ export interface Category {
   expenseCategoryId: string;
   name: string;
   description: string;
-  totalSum?: number;
+  totalSum: number;
 }
 
 export type Categories = Category[];

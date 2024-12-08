@@ -1,8 +1,9 @@
 export interface Expense {
-  expenseId: string;
   amountInCents: number;
+  categoryId: string;
+  expenseId: string;
+  expenseType: string;
   description?: string;
-  expenseCategoryId: string;
   createdAt: string;
 }
 

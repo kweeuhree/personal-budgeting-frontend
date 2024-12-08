@@ -6,7 +6,11 @@ import {
   addCategories,
   addExpenses,
   budgetDelete,
+  deleteExpense,
   deleteAllExpenses,
+  incrementCategoryExpenses,
+  decrementCategoryExpenses,
+  asyncBudgetUpdate,
 } from "./slices";
 import { resetStoreState } from "./actions";
 
@@ -73,6 +77,66 @@ listenerMiddleware.startListening({
       throw new Error(
         `Failed to fetch additional user information: ${error instanceof Error ? error.message : "Unknown error."}`
       );
+    }
+  },
+});
+
+// every time an expense is created, we want to know its category id
+// so that we can fetch that category and increase its totalSum by the amountInCents of the expense
+listenerMiddleware.startListening({
+  matcher: expenseApi.endpoints.expenseCreate.matchFulfilled,
+  effect: async (action, { dispatch }) => {
+    console.log("attempting incrementing category expenses...");
+    try {
+      const { amountInCents, categoryId } = action.payload;
+      console.log("Action payload", action.payload);
+      console.log(
+        "updating for category",
+        categoryId,
+        " with amount:",
+        amountInCents
+      );
+      if (categoryId) {
+        dispatch(
+          incrementCategoryExpenses({
+            expenseCategoryId: categoryId,
+            amountInCents,
+          })
+        );
+      }
+
+      await dispatch(asyncBudgetUpdate());
+    } catch (error) {
+      throw new Error(error instanceof Error ? error.message : "Unknown error");
+    }
+  },
+});
+
+// listen for expense deletion
+listenerMiddleware.startListening({
+  actionCreator: deleteExpense,
+  effect: async (action, { dispatch }) => {
+    try {
+      const { amountInCents, categoryId } = action.payload;
+      console.log("Action payload", action.payload);
+      console.log(
+        "updating for category",
+        categoryId,
+        " with amount:",
+        amountInCents
+      );
+      if (categoryId) {
+        dispatch(
+          decrementCategoryExpenses({
+            expenseCategoryId: categoryId,
+            amountInCents,
+          })
+        );
+      }
+
+      await dispatch(asyncBudgetUpdate());
+    } catch (error) {
+      throw new Error(error instanceof Error ? error.message : "Unknown error");
     }
   },
 });

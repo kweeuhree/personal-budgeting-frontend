@@ -4,6 +4,8 @@ export * from "./userForms/LoginForm";
 export * from "./userForms/SignupForm";
 export * from "./budgetForms";
 export * from "./expenseForms";
+export * from "./categoryForms";
 export * from "./AccountFieldset";
 export * from "./CategoriesDropdown";
 export * from "./Expenses";
+export * from "./Categories";

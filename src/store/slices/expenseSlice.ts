@@ -13,7 +13,7 @@ const expenseSlice = createAppSlice({
       state.push(...action.payload);
     },
     createExpense: (state: Expenses, action: PayloadAction<Expense>) => {
-      state.push(action.payload);
+      state.unshift(action.payload);
     },
     updateExpense: (state: Expenses, action: PayloadAction<Expense>) => {
       state.map((exp) =>
@@ -22,11 +22,11 @@ const expenseSlice = createAppSlice({
           : exp
       );
     },
-    deleteExpense: (state: Expenses, action: PayloadAction<string>) => {
-      state.filter((exp) => exp.expenseId !== action.payload);
+    deleteExpense: (state: Expenses, action: PayloadAction<Expense>) => {
+      return state.filter((exp) => exp.expenseId !== action.payload.expenseId);
     },
     deleteAllExpenses: () => {
-      return { ...initialState };
+      return initialState;
     },
   },
   extraReducers: (builder) => {

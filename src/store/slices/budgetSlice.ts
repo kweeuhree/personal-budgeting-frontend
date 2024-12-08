@@ -1,7 +1,9 @@
-import { PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { createAppSlice } from "../createAppSlice";
 
 import { RESET_STORE_STATE } from "../actions";
+import { RootState } from "../store";
+import { budgetApi } from "../apis";
 
 interface Budget {
   budgetId: string;
@@ -52,3 +54,22 @@ export const { budgetCreate, budgetDelete, budgetUpdate } = budgetSlice.actions;
 export const { selectBudget } = budgetSlice.selectors;
 
 export const budgetReducer = budgetSlice.reducer;
+
+export const asyncBudgetUpdate = createAsyncThunk(
+  "budget/asyncBudgetUpdate",
+  async (_, { dispatch, getState }) => {
+    const state = getState() as RootState;
+    const budgetId = state.budget?.budgetId;
+    if (!budgetId) throw new Error("No budget ID found");
+
+    const budget = await dispatch(
+      budgetApi.endpoints.fetchBudget.initiate(budgetId, { forceRefetch: true })
+    ).unwrap();
+
+    if (budget) {
+      console.log("Updating with budget:");
+      console.log(budget);
+      dispatch(budgetUpdate(budget));
+    }
+  }
+);

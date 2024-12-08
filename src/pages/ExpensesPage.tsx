@@ -4,21 +4,24 @@ import {
   useAppSelector,
   useExpenseDeleteMutation,
   deleteExpense,
-  budgetUpdate,
 } from "../store";
 import { Expenses } from "../components";
+import { Expense } from "../types";
 
 export const ExpensesPage = () => {
   const expenses = useAppSelector(selectAllExpenses);
   const [expenseDelete, { isSuccess, error }] = useExpenseDeleteMutation();
   const dispatch = useAppDispatch();
 
-  const handleDelete = async (expenseId: string) => {
+  const handleDelete = async (expense: Expense) => {
     try {
       console.log("attempting delete...");
-      const updatedBudget = await expenseDelete(expenseId).unwrap();
-      dispatch(deleteExpense(expenseId));
-      dispatch(budgetUpdate(updatedBudget));
+      const response = await expenseDelete(expense.expenseId).unwrap();
+      dispatch(deleteExpense(expense));
+      if (response.ok) {
+        console.log("dispatching delete");
+        dispatch(deleteExpense(expense));
+      }
     } catch (error) {
       throw new Error(
         `Failed to delete expense: ${error instanceof Error ? error.message : error}`
@@ -26,11 +29,11 @@ export const ExpensesPage = () => {
     }
   };
 
-  const handleConfirmDelete = (expenseId: string, amountInDollars: string) => {
-    const found = expenses.find((exp) => exp.expenseId === expenseId);
+  const handleConfirmDelete = (expense: Expense, amountInDollars: string) => {
+    const found = expenses.find((exp) => exp.expenseId === expense.expenseId);
     const confirmStmt = `Are you sure you want to permanently delete ${amountInDollars}?`;
     if (found && confirm(confirmStmt)) {
-      handleDelete(expenseId);
+      handleDelete(expense);
     }
   };
 
