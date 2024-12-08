@@ -40,7 +40,7 @@ export const CreateExpenseForm: React.FC = () => {
     const amountInCents = convertStringtoCents(expenseData.value);
 
     let newExpense: Partial<Expense> = {
-      description: expenseData.descripton,
+      description: expenseData.description,
       expenseType: expenseData.expenseType,
       amountInCents,
     };
