@@ -7,9 +7,9 @@ import {
   useExpenseCreateMutation,
   useCategoryCreateMutation,
   useAppDispatch,
-  budgetUpdate,
+  createExpense,
 } from "../../store";
-import { type StringInput } from "../../types";
+import { Expense, type StringInput } from "../../types";
 import { AccountFieldset, CategoriesDropdown } from "..";
 import { getCategoryId, convertStringtoCents } from "../../utils";
 
@@ -27,7 +27,6 @@ export const CreateExpenseForm: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const {
-    // reset,
     handleSubmit,
     register,
     formState: { errors },
@@ -38,30 +37,28 @@ export const CreateExpenseForm: React.FC = () => {
   };
 
   const handleCreateExpense = async (expenseData: StringInput) => {
-    console.log(`Attemting to create expense: ${expenseData}`);
     const amountInCents = convertStringtoCents(expenseData.value);
-    const categoryId = getCategoryId(categories, expenseData.category);
-    console.log(categoryId);
+
+    let newExpense: Partial<Expense> = {
+      description: expenseData.descripton,
+      expenseType: expenseData.expenseType,
+      amountInCents,
+    };
+    let categoryId;
+
     try {
       if (categoriesExist) {
-        const updatedBudget = await expenseCreate({
-          description: expenseData.descripton,
-          category: expenseData.category,
-          expenseType: expenseData.expenseType,
-          amountInCents,
-          categoryId,
-        }).unwrap();
-        console.log("new expense", updatedBudget);
-        dispatch(budgetUpdate(updatedBudget));
+        categoryId = getCategoryId(categories, expenseData.category);
       } else {
         const newCategory = await categoryCreate({
           name: expenseData.category,
         }).unwrap();
-        const newExpense = await expenseCreate(expenseData).unwrap();
-        console.log("new expense", newExpense);
-        console.log("new category", newCategory);
+        categoryId = newCategory.expenseCategoryId;
       }
+      newExpense = { ...newExpense, categoryId };
+      const createdExpense = await expenseCreate(newExpense).unwrap();
 
+      dispatch(createExpense(createdExpense));
       handleNavigateToBudget();
     } catch (error) {
       console.error("Error occurred while creating expense:", error);
