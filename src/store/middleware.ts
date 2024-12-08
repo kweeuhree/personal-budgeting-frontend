@@ -11,6 +11,7 @@ import {
   incrementCategoryExpenses,
   decrementCategoryExpenses,
   asyncBudgetUpdate,
+  clearAllTotalSums,
 } from "./slices";
 import { resetStoreState } from "./actions";
 
@@ -146,5 +147,7 @@ listenerMiddleware.startListening({
   actionCreator: budgetDelete,
   effect: (_, { dispatch }) => {
     dispatch(deleteAllExpenses());
+    // has to clear all totalSums of all categories
+    dispatch(clearAllTotalSums());
   },
 });

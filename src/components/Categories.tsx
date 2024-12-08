@@ -1,4 +1,5 @@
 import { type Categories as CategoriesType } from "../types";
+import { separateCents } from "../utils";
 
 type Props = {
   categories: CategoriesType;
@@ -16,7 +17,8 @@ export const Categories: React.FC<Props> = ({
         <div>{name}</div>
         <div className={!description ? "invisible" : ""}>{description}</div>
         <div>
-          Total spent per category: <span>{totalSum ?? "0"}</span>
+          Total spent per category:
+          <span>{totalSum > 0 ? separateCents(totalSum) : totalSum}</span>
         </div>
         {/* Delete button */}
         <button

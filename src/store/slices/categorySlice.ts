@@ -32,7 +32,7 @@ const categorySlice = createAppSlice({
       );
 
       if (found) {
-        found.totalSum += amountInCents;
+        found.totalSum = (found.totalSum || 0) + amountInCents;
       }
     },
     decrementCategoryExpenses: (
@@ -48,8 +48,19 @@ const categorySlice = createAppSlice({
       );
 
       if (found) {
-        found.totalSum -= amountInCents;
+        found.totalSum = (found.totalSum || 0) - amountInCents;
+        if (found.totalSum < 0) {
+          found.totalSum = 0;
+        }
       }
+    },
+    clearAllTotalSums: (state: Categories) => {
+      return state.map((cat) => {
+        return {
+          ...cat,
+          totalSum: 0,
+        };
+      });
     },
   },
   extraReducers: (builder) => {
@@ -69,6 +80,7 @@ export const {
   addCategories,
   incrementCategoryExpenses,
   decrementCategoryExpenses,
+  clearAllTotalSums,
 } = categorySlice.actions;
 
 export const { selectCategories, selectSpecificCategory } =
