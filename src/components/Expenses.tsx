@@ -1,9 +1,9 @@
 import { useAppSelector, selectCategories } from "../store";
 import { getCategoryName, separateCents } from "../utils";
-import { type Expenses as ExpensesType } from "../types";
+import { Expense, type Expenses as ExpensesType } from "../types";
 
 type Props = {
-  handleConfirmDelete: (expenseId: string, amountInDollars: string) => void;
+  handleConfirmDelete: (expense: Expense, amountInDollars: string) => void;
   expenses: ExpensesType;
 };
 
@@ -13,14 +13,9 @@ export const Expenses: React.FC<Props> = ({
 }) => {
   const categories = useAppSelector(selectCategories);
   const expensesJSX = expenses.map((exp) => {
-    const {
-      expenseId,
-      expenseCategoryId,
-      amountInCents,
-      description,
-      createdAt,
-    } = exp;
-    const categoryName = getCategoryName(categories, expenseCategoryId);
+    const { expenseId, categoryId, amountInCents, description, createdAt } =
+      exp;
+    const categoryName = getCategoryName(categories, categoryId);
     const creationTime = new Date(createdAt).toLocaleDateString();
     const amountInDollars = separateCents(amountInCents);
     return (
@@ -39,7 +34,7 @@ export const Expenses: React.FC<Props> = ({
         </div>
         {/* Delete button */}
         <button
-          onClick={() => handleConfirmDelete(expenseId, amountInDollars)}
+          onClick={() => handleConfirmDelete(exp, amountInDollars)}
           className="flex"
         >
           &#9249;&#10062;
