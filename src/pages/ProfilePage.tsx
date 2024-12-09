@@ -15,12 +15,12 @@ export const ProfilePage = () => {
 
   const greeting = `Hello, ${displayName || "friend"}!`;
 
-  const handleDeleteBudget = () => {
+  const handleDeleteBudget = async () => {
     const confirmStmt =
       "This action cannot be undone. Are you sure that you want to reset budget and expenses?";
     if (confirm(confirmStmt)) {
       try {
-        deleteBudget(budgetId);
+        await deleteBudget(budgetId);
         dispatch(budgetDelete());
       } catch (error) {
         throw new Error(
