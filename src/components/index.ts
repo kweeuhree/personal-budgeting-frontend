@@ -9,3 +9,4 @@ export * from "./AccountFieldset";
 export * from "./CategoriesDropdown";
 export * from "./Expenses";
 export * from "./Categories";
+export * from "./Budget";
