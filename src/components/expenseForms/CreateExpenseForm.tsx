@@ -8,6 +8,7 @@ import {
   useCategoryCreateMutation,
   useAppDispatch,
   createExpense,
+  createCategory,
 } from "../../store";
 import { Expense, type StringInput } from "../../types";
 import { AccountFieldset, CategoriesDropdown } from "..";
@@ -54,6 +55,7 @@ export const CreateExpenseForm: React.FC = () => {
           name: expenseData.category,
         }).unwrap();
         categoryId = newCategory.expenseCategoryId;
+        dispatch(createCategory(newCategory));
       }
       newExpense = { ...newExpense, categoryId };
       const createdExpense = await expenseCreate(newExpense).unwrap();
@@ -79,7 +81,7 @@ export const CreateExpenseForm: React.FC = () => {
           Description <span>(optional)</span>
         </label>
         <input id="description" type="text" {...register("description", {})} />
-        {errors.description && <span>{errors.description.toString()}</span>}
+
         <br />
         <label htmlFor="value">Value</label>
         <input
@@ -92,6 +94,7 @@ export const CreateExpenseForm: React.FC = () => {
             },
           })}
         />
+        {errors.value && <span>{errors.value.toString()}</span>}
         <br />
         {categoriesExist ? (
           <CategoriesDropdown
