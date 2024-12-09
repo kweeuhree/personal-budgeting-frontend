@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
+import { useAppDispatch, fetchCsrfToken, setCsrfToken } from "./store";
 import { UnauthorizedLayout, DefaultLayout } from "./layouts";
 import {
   MainPage,
@@ -14,8 +15,8 @@ import {
   SignupForm,
   LoginForm,
   CreateExpenseForm,
+  CreateCategoryForm,
 } from "./components";
-import { useAppDispatch, fetchCsrfToken, setCsrfToken } from "./store";
 
 import "./App.css";
 
@@ -45,7 +46,6 @@ function App() {
       </Route>
 
       {/* protected routes */}
-
       <Route path="/budget" element={<DefaultLayout />}>
         <Route index element={<ProtectedRoute element={MainPage} />} />
       </Route>
@@ -60,6 +60,10 @@ function App() {
 
       <Route path="/categories" element={<DefaultLayout />}>
         <Route index element={<ProtectedRoute element={CategoriesPage} />} />
+        <Route
+          path="/categories/create"
+          element={<ProtectedRoute element={CreateCategoryForm} />}
+        />
       </Route>
 
       <Route path="/profile" element={<DefaultLayout />}>
