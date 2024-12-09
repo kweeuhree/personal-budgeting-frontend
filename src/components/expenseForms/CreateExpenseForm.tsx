@@ -9,18 +9,16 @@ import {
   useAppDispatch,
   createExpense,
   createCategory,
+  selectBudget,
 } from "../../store";
 import { Expense, type StringInput } from "../../types";
 import { AccountFieldset, CategoriesDropdown } from "..";
 import { getCategoryId, convertStringtoCents } from "../../utils";
 
 export const CreateExpenseForm: React.FC = () => {
-  // should send a post request to the database
-  // should check whether any category exists,
-  // should send a post request to category model before creating
-  // the expense
   const [expenseCreate, { isSuccess, error }] = useExpenseCreateMutation();
   const [categoryCreate] = useCategoryCreateMutation();
+  const { budgetId } = useAppSelector(selectBudget);
   const categories = useAppSelector(selectCategories);
   const categoriesExist = categories.length > 0;
 
@@ -72,7 +70,10 @@ export const CreateExpenseForm: React.FC = () => {
     navigate("/budget");
   };
 
-  return (
+  // if budget does not exist, display create budget button
+  return !budgetId ? (
+    "create a budget to start tracking expenses"
+  ) : (
     <>
       {isSuccess ? "Expense created" : error && "error"}
       <h1>Create Expense</h1>
