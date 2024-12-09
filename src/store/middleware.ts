@@ -62,26 +62,6 @@ listenerMiddleware.startListening({
   },
 });
 
-// Listen for a successful category creation
-listenerMiddleware.startListening({
-  matcher: categoryApi.endpoints.categoryCreate.matchFulfilled,
-  effect: async (_, { dispatch }) => {
-    try {
-      const categories = await dispatch(
-        categoryApi.endpoints.fetchAllCategories.initiate({})
-      ).unwrap();
-      if (categories.length === 0) {
-        return;
-      }
-      dispatch(addCategories(categories));
-    } catch (error) {
-      throw new Error(
-        `Failed to fetch additional user information: ${error instanceof Error ? error.message : "Unknown error."}`
-      );
-    }
-  },
-});
-
 // every time an expense is created, we want to know its category id
 // so that we can fetch that category and increase its totalSum by the amountInCents of the expense
 listenerMiddleware.startListening({
