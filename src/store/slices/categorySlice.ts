@@ -14,10 +14,10 @@ const categorySlice = createAppSlice({
       state.push(...action.payload);
     },
     createCategory: (state: Categories, action: PayloadAction<Category>) => {
-      state.push(action.payload);
+      state.unshift(action.payload);
     },
     deleteCategory: (state: Categories, action: PayloadAction<string>) => {
-      state.filter((cat) => cat.expenseCategoryId !== action.payload);
+      return state.filter((cat) => cat.expenseCategoryId !== action.payload);
     },
     incrementCategoryExpenses: (
       state: Categories,
@@ -48,7 +48,7 @@ const categorySlice = createAppSlice({
       );
 
       if (found) {
-        found.totalSum = (found.totalSum || 0) - amountInCents;
+        found.totalSum = found.totalSum - amountInCents;
         if (found.totalSum < 0) {
           found.totalSum = 0;
         }
