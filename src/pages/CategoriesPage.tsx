@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import {
   useAppSelector,
   selectCategories,
@@ -8,20 +10,17 @@ import {
 import { Categories, CreateCategoryForm } from "../components";
 
 export const CategoriesPage = () => {
-  // should fetch categories and update state if they exist
-  // should display a message if no categories exist
-  // should dipslay an add category form if no category exists
   const categories = useAppSelector(selectCategories);
   const [categoryDelete] = useCategoryDeleteMutation();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleCreateCategory = () => {
-    console.log("attempting creating a category");
+    navigate("/categories/create");
   };
 
   const handleDelete = async (expenseCategoryId: string) => {
     try {
-      console.log("attempting delete...");
       await categoryDelete(expenseCategoryId).unwrap();
       dispatch(deleteCategory(expenseCategoryId));
     } catch (error) {
