@@ -64,12 +64,9 @@ export const CreateBudgetForm: React.FC = () => {
         <input
           id="checkingBalance"
           type="number"
+          min="0"
           {...register("checkingBalance", {
             required: "Checking balance is required",
-            min: {
-              value: 0,
-              message: "0 is the minimum value to accept this input.",
-            },
           })}
         />
         {errors.checkingBalance && <span>This field is required</span>}
@@ -78,12 +75,8 @@ export const CreateBudgetForm: React.FC = () => {
         <input
           id="savingsBalance"
           type="number"
-          {...register("savingsBalance", {
-            min: {
-              value: 0,
-              message: "0 is the minimum value to accept this input.",
-            },
-          })}
+          min="0"
+          {...register("savingsBalance", {})}
         />
         {errors.savingsBalance && (
           <span>{errors.savingsBalance.toString()}</span>

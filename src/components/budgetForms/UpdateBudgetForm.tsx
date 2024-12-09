@@ -70,12 +70,9 @@ export const UpdateBudgetForm: React.FC<Props> = (props) => {
         <label htmlFor="balanceValue">Value</label>
         <input
           type="number"
+          min="0"
           {...register("balanceValue", {
             required: "This field is required",
-            min: {
-              value: 0,
-              message: "0 is the minimum amount to accept this input",
-            },
           })}
         />
         <AccountFieldset

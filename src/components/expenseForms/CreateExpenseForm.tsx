@@ -87,12 +87,9 @@ export const CreateExpenseForm: React.FC = () => {
         <label htmlFor="value">Value</label>
         <input
           type="number"
+          min="0"
           {...register("value", {
             required: "This field is required",
-            min: {
-              value: 0,
-              message: "0 is the minimum amount to accept this input",
-            },
           })}
         />
         {errors.value && <span>{errors.value.toString()}</span>}
@@ -111,10 +108,6 @@ export const CreateExpenseForm: React.FC = () => {
               type="text"
               {...register("category", {
                 required: "Category is required",
-                min: {
-                  value: 0,
-                  message: "Please include a category",
-                },
               })}
             />
           </>
