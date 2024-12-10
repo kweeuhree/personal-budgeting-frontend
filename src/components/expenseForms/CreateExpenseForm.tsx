@@ -86,6 +86,7 @@ export const CreateExpenseForm: React.FC = () => {
         <br />
         <label htmlFor="value">Value</label>
         <input
+          id="value"
           type="number"
           min="0"
           {...register("value", {
