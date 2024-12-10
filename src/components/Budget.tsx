@@ -1,5 +1,7 @@
 import { PartialBudget } from "../store";
 
+import { SAVINGS_BALANCE, CHECKING_BALANCE } from "../utils";
+
 type Props = {
   handleUpdateBalance: (balanceType: string) => void;
   budget: PartialBudget;
@@ -20,7 +22,7 @@ export const Budget: React.FC<Props> = ({ handleUpdateBalance, budget }) => {
         Checking balance: {checkingBalance}
         <span
           style={{ cursor: "pointer" }}
-          onClick={() => handleUpdateBalance("CheckingBalance")}
+          onClick={() => handleUpdateBalance(CHECKING_BALANCE)}
         >
           (+)
         </span>
@@ -29,7 +31,7 @@ export const Budget: React.FC<Props> = ({ handleUpdateBalance, budget }) => {
         Savings balance: {savingsBalance}
         <span
           style={{ cursor: "pointer" }}
-          onClick={() => handleUpdateBalance("SavingsBalance")}
+          onClick={() => handleUpdateBalance(SAVINGS_BALANCE)}
         >
           (+)
         </span>

@@ -7,7 +7,12 @@ import {
   useAppDispatch,
   useCreateBudgetMutation,
 } from "../../store";
-import { convertNumberToCents, convertStringToNumber } from "../../utils";
+import {
+  convertNumberToCents,
+  convertStringToNumber,
+  SAVINGS_BALANCE,
+  CHECKING_BALANCE,
+} from "../../utils";
 import { type StringInput } from "../../types";
 
 const processBudget = (newBudget: StringInput): PartialBudget => {
@@ -58,25 +63,25 @@ export const CreateBudgetForm: React.FC = () => {
     <>
       {isSuccess ? "Budget created" : error && "error"}
       <form id="createBudgetForm" onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="checkingBalance">
+        <label htmlFor={CHECKING_BALANCE}>
           Create checking account balance:
         </label>
         <input
-          id="checkingBalance"
+          id={CHECKING_BALANCE}
           type="number"
           min="0"
-          {...register("checkingBalance", {
+          {...register(CHECKING_BALANCE, {
             required: "Checking balance is required",
           })}
         />
         {errors.checkingBalance && <span>This field is required</span>}
         <br />
-        <label htmlFor="savingsBalance">Create savings account balance:</label>
+        <label htmlFor={SAVINGS_BALANCE}>Create savings account balance:</label>
         <input
-          id="savingsBalance"
+          id={SAVINGS_BALANCE}
           type="number"
           min="0"
-          {...register("savingsBalance", {})}
+          {...register(SAVINGS_BALANCE, {})}
         />
         {errors.savingsBalance && (
           <span>{errors.savingsBalance.toString()}</span>

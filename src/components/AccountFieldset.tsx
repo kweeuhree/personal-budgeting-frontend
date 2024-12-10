@@ -4,6 +4,8 @@ import {
   FieldValues,
 } from "react-hook-form";
 
+import { SAVINGS_BALANCE, CHECKING_BALANCE } from "../utils";
+
 type AccountFieldsetProps = {
   balanceType?: string;
   name: string;
@@ -21,26 +23,26 @@ export const AccountFieldset: React.FC<AccountFieldsetProps> = ({
     <legend>Account</legend>
 
     <input
-      id="CheckingBalance"
+      id={CHECKING_BALANCE}
       type="radio"
-      value="CheckingBalance"
-      checked={balanceType ? balanceType === "CheckingBalance" : undefined}
+      value={CHECKING_BALANCE}
+      checked={balanceType ? balanceType === CHECKING_BALANCE : undefined}
       {...register(name, {
         required: "Select an account type",
       })}
     />
-    <label htmlFor="CheckingBalance">Checking</label>
+    <label htmlFor={CHECKING_BALANCE}>Checking</label>
 
     <input
-      id="SavingsBalance"
+      id={SAVINGS_BALANCE}
       type="radio"
-      value="SavingsBalance"
-      checked={balanceType ? balanceType === "SavingsBalance" : undefined}
+      value={SAVINGS_BALANCE}
+      checked={balanceType ? balanceType === SAVINGS_BALANCE : undefined}
       {...register(name, {
         required: "Select an account type",
       })}
     />
-    <label htmlFor="SavingsBalance">Savings</label>
+    <label htmlFor={SAVINGS_BALANCE}>Savings</label>
 
     {errors.balanceType && <span>{errors.balanceType.message as string}</span>}
   </fieldset>
