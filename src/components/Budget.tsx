@@ -13,7 +13,7 @@ export const Budget: React.FC<Props> = ({ handleUpdateBalance, budget }) => {
     savingsBalance,
     budgetTotal,
     totalSpent,
-    budgetRemaining,
+    // budgetRemaining,
   } = budget;
 
   return (
@@ -38,7 +38,7 @@ export const Budget: React.FC<Props> = ({ handleUpdateBalance, budget }) => {
       </div>
       <div>Total budget: {budgetTotal}</div>
       <div>Total spent: {totalSpent}</div>
-      <div>Total remaining: {budgetRemaining}</div>
+      {/* <div>Total remaining: {budgetRemaining}</div> */}
     </div>
   );
 };
