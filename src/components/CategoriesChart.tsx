@@ -2,34 +2,20 @@ import { useRef, useEffect, useState, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import ApexCharts from "apexcharts";
 
-import { selectAllExpenses, selectCategories, useAppSelector } from "../store";
-import {
-  getChartOptions,
-  getGroupedExpenses,
-  SAVINGS_BALANCE,
-  CHECKING_BALANCE,
-} from "../utils";
+import { selectCategories, useAppSelector } from "../store";
+import { getChartOptions, SAVINGS_BALANCE, CHECKING_BALANCE } from "../utils";
+import { useGroupedExpenses } from "../hooks";
 
 export const CategoriesChart = () => {
   const donutRef = useRef<HTMLDivElement | null>(null);
 
   const categories = useAppSelector(selectCategories);
-  const expenses = useAppSelector(selectAllExpenses);
+  const { groupedSavings, groupedChecking } = useGroupedExpenses();
   const [selectedAccount, setSelectedAccount] = useState<string[]>([]);
 
   const navigate = useNavigate();
 
   const totalSums = categories.map((cat) => cat.totalSum);
-  const groupedSavings = getGroupedExpenses(
-    categories,
-    expenses,
-    SAVINGS_BALANCE
-  );
-  const groupedChecking = getGroupedExpenses(
-    categories,
-    expenses,
-    CHECKING_BALANCE
-  );
 
   const handleNavigate = () => {
     navigate("/categories/create");
@@ -65,17 +51,12 @@ export const CategoriesChart = () => {
       updateChart();
 
       return () => {
-        chart.destroy();
+        if (chart) {
+          chart.destroy();
+        }
       };
     }
-  }, [
-    categories,
-    expenses,
-    totalSums,
-    selectedAccount,
-    groupedSavings,
-    groupedChecking,
-  ]);
+  }, [categories, totalSums, selectedAccount, groupedSavings, groupedChecking]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
