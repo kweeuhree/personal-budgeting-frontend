@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { selectBudget, useAppSelector } from "../store";
 import { formatBudget } from "../utils";
-import { UpdateBudgetForm, Budget } from "../components";
+import { UpdateBudgetForm, Budget, CategoriesChart } from "../components";
 
 export const BudgetPage = () => {
   const budget = useAppSelector(selectBudget);
@@ -23,7 +23,7 @@ export const BudgetPage = () => {
         budget={formattedBudget}
       />
 
-      <div className="chart-container"></div>
+      <CategoriesChart />
     </div>
   );
 };
