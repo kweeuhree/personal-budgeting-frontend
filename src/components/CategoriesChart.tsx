@@ -11,7 +11,7 @@ export const CategoriesChart = () => {
 
   const categories = useAppSelector(selectCategories);
   const { groupedSavings, groupedChecking } = useGroupedExpenses();
-  const [selectedAccount, setSelectedAccount] = useState<string[]>([]);
+  const [selectedAccount, setSelectedAccount] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
@@ -30,30 +30,30 @@ export const CategoriesChart = () => {
       const updateChart = () => {
         let displayedExpenses: number[] = [];
 
-        if (
-          selectedAccount.includes(SAVINGS_BALANCE) &&
-          selectedAccount.includes(CHECKING_BALANCE)
-        ) {
-          displayedExpenses = totalSums;
-        } else if (selectedAccount.includes(SAVINGS_BALANCE)) {
-          displayedExpenses = groupedSavings;
-        } else if (selectedAccount.includes(CHECKING_BALANCE)) {
-          displayedExpenses = groupedChecking;
-        } else {
-          displayedExpenses = totalSums;
+        switch (selectedAccount) {
+          case SAVINGS_BALANCE:
+            displayedExpenses = groupedSavings;
+            break;
+          case CHECKING_BALANCE:
+            displayedExpenses = groupedChecking;
+            break;
+          case "all":
+            displayedExpenses = totalSums;
+            break;
+          default:
+            displayedExpenses = totalSums;
+            break;
         }
 
         if (chart) {
-          chart.updateSeries(displayedExpenses);
+          chart.updateSeries(displayedExpenses, true);
         }
       };
 
       updateChart();
 
       return () => {
-        if (chart) {
-          chart.destroy();
-        }
+        chart.destroy();
       };
     }
   }, [categories, totalSums, selectedAccount, groupedSavings, groupedChecking]);
@@ -61,34 +61,40 @@ export const CategoriesChart = () => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
 
-    setSelectedAccount((prev) =>
-      prev.includes(value)
-        ? prev.filter((account) => account !== value)
-        : [...prev, value]
-    );
+    setSelectedAccount((prev) => (prev === value ? null : value));
   };
 
   return categories ? (
     <div className="chart-container">
       <input
-        id="checking-checkbox"
-        type="checkbox"
+        id="checking-radio"
+        type="radio"
         name="accountType"
         value={CHECKING_BALANCE}
-        checked={selectedAccount.includes(CHECKING_BALANCE)}
+        checked={selectedAccount === CHECKING_BALANCE}
         onChange={handleChange}
       />
-      <label htmlFor="checking-checkbox">Checking</label>
+      <label htmlFor="checking-radio">Checking</label>
 
       <input
-        id="savings-checkbox"
-        type="checkbox"
+        id="savings-radio"
+        type="radio"
         name="accountType"
         value={SAVINGS_BALANCE}
-        checked={selectedAccount.includes(SAVINGS_BALANCE)}
+        checked={selectedAccount === SAVINGS_BALANCE}
         onChange={handleChange}
       />
-      <label htmlFor="savings-checkbox">Savings</label>
+      <label htmlFor="savings-radio">Savings</label>
+
+      <input
+        id="all-radio"
+        type="radio"
+        name="accountType"
+        value="all"
+        checked={selectedAccount === "all"}
+        onChange={handleChange}
+      />
+      <label htmlFor="all-radio">All</label>
 
       <div id="donut" ref={donutRef}></div>
     </div>
