@@ -2,13 +2,13 @@ import { useRef, useEffect, useState, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import ApexCharts from "apexcharts";
 
-import { selectCategories, useAppSelector } from "../store";
+import { selectAllExpenses, selectCategories, useAppSelector } from "../store";
 import { getChartOptions, SAVINGS_BALANCE, CHECKING_BALANCE } from "../utils";
 import { useGroupedExpenses } from "../hooks";
 
 export const CategoriesChart = () => {
   const donutRef = useRef<HTMLDivElement | null>(null);
-
+  const expenses = useAppSelector(selectAllExpenses);
   const categories = useAppSelector(selectCategories);
   const { groupedSavings, groupedChecking } = useGroupedExpenses();
   const [selectedAccount, setSelectedAccount] = useState<string | null>(null);
@@ -18,7 +18,7 @@ export const CategoriesChart = () => {
   const totalSums = categories.map((cat) => cat.totalSum);
 
   const handleNavigate = () => {
-    navigate("/categories/create");
+    navigate("/expenses/create");
   };
 
   useEffect(() => {
@@ -64,7 +64,7 @@ export const CategoriesChart = () => {
     setSelectedAccount((prev) => (prev === value ? null : value));
   };
 
-  return categories ? (
+  return expenses.length ? (
     <div className="chart-container">
       <input
         id="checking-radio"
@@ -99,6 +99,6 @@ export const CategoriesChart = () => {
       <div id="donut" ref={donutRef}></div>
     </div>
   ) : (
-    <button onClick={handleNavigate}>Create a category +</button>
+    <button onClick={handleNavigate}>Create an expense +</button>
   );
 };
