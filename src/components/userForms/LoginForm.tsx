@@ -42,15 +42,15 @@ export const LoginForm: React.FC = () => {
         dispatch(budgetUpdate(response.budget));
       }
       navigate("/budget");
-    } catch (err) {
-      console.error("Login failed:", err);
+    } catch (error) {
+      throw new Error(error instanceof Error ? error.message : "Unknown error");
     }
   };
 
   return (
     <>
       {isLoading ? "loading" : error && "error"}
-      <form id="loginForm" onSubmit={handleSubmit(onSubmit)}>
+      <form id="loginForm" className="my-10" onSubmit={handleSubmit(onSubmit)}>
         <div className="grid">
           <label htmlFor="email">Email:</label>
           <input

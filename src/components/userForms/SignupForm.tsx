@@ -31,12 +31,12 @@ export const SignupForm: React.FC = () => {
       }).unwrap();
       reset();
     } catch (error) {
-      throw new Error("Failed to sign up");
+      throw new Error(error instanceof Error ? error.message : "Unknown error");
     }
   };
 
   return (
-    <form id="signupForm" onSubmit={handleSubmit(onSubmit)}>
+    <form id="signupForm" className="my-10" onSubmit={handleSubmit(onSubmit)}>
       {isSuccess && <p className="success-message">Signed up successfully!</p>}
       {isError && error && (
         <p className="error-message">This email address is already is use</p>
