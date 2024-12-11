@@ -12,36 +12,52 @@ export const Expenses: React.FC<Props> = ({
   expenses,
 }) => {
   const categories = useAppSelector(selectCategories);
-  const expensesJSX = expenses.map((exp) => {
-    const { expenseId, categoryId, amountInCents, description, createdAt } =
-      exp;
-    const categoryName = getCategoryName(categories, categoryId);
-    const creationTime = new Date(createdAt).toLocaleDateString();
-    const amountInDollars = separateCents(amountInCents);
-    return (
-      <div key={expenseId} className="flex">
-        <div>
-          Amount: <span>{amountInDollars}</span>
-        </div>
-        <div className={!description ? "invisible" : ""}>
-          Description: <span>{description}</span>
-        </div>
-        <div>
-          Category: <span>{categoryName}</span>
-        </div>
-        <div>
-          Created at: <span>{creationTime}</span>
-        </div>
-        {/* Delete button */}
-        <button
-          onClick={() => handleConfirmDelete(exp, amountInDollars)}
-          className="flex"
-        >
-          &#9249;&#10062;
-        </button>
-      </div>
-    );
-  });
 
-  return <div>{expensesJSX}</div>;
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>Amount</th>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Account</th>
+          <th>Created At</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {expenses.map((exp) => {
+          const {
+            expenseId,
+            categoryId,
+            expenseType,
+            amountInCents,
+            description,
+            createdAt,
+          } = exp;
+          const categoryName = getCategoryName(categories, categoryId);
+          const creationTime = new Date(createdAt).toLocaleDateString();
+          const amountInDollars = separateCents(amountInCents);
+          const account = expenseType.slice(0, expenseType.indexOf("B"));
+          return (
+            <tr key={expenseId}>
+              <td>{amountInDollars}</td>
+              <td className={!description ? "invisible" : ""}>{description}</td>
+              <td>{categoryName}</td>
+              <td>{account}</td>
+              <td>{creationTime}</td>
+              <td>
+                {/* Delete button */}
+                <button
+                  onClick={() => handleConfirmDelete(exp, amountInDollars)}
+                >
+                  &#9249;&#10062;
+                </button>
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  );
 };
