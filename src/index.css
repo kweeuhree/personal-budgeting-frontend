@@ -6,9 +6,9 @@
   --color-bg: #dbdae7; /* white sand */
   --color-focus: #3a5054; /* slate-teal */
   --color-pale-steel: #51789e86;
-  --color-steel-haze: #51789e1f;
+  --color-steel-haze: #51789e2d;
+  --color-blue-sage: #4c627736;
   --color-navy: #0f3d66;
-  /* --color-focus: #3265d3; */
   --color-sun: #fcd46a;
   --color-amber: #f8b319;
   --color-charcoal: rgba(71, 68, 68);
@@ -32,11 +32,14 @@ a {
   font-weight: 500;
   color: var(--color-navy);
   text-decoration: inherit;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 2px;
 }
 a:hover {
   text-decoration: underline;
   text-decoration-color: var(--color-focus);
-  text-decoration-thickness: 1px;
+  text-decoration-thickness: 2px;
 }
 
 body {
@@ -113,7 +116,6 @@ form::before {
   height: 100%;
   backdrop-filter: blur(2px);
   z-index: -1;
-  /* background-color: var(--color-steel-haze); */
   border-radius: inherit;
 }
 

@@ -7,6 +7,7 @@ module.exports = {
         "slate-teal": "#3a5054",
         bg: "#e7e3da",
         "pale-steel": "#51789e86",
+        "blue-sage": "#4c627736",
         navy: "#0f3d66",
         focus: "#258de9",
         sun: "#fcd46a",
