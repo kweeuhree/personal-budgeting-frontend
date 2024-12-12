@@ -5,5 +5,7 @@
 }
 
 .unselected {
-  border: 1px solid transparent;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 2px;
 }
