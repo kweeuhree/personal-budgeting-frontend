@@ -1,9 +1,10 @@
-import { type Category } from "../types";
 import {
   type UseFormRegister,
   FieldErrors,
   FieldValues,
 } from "react-hook-form";
+
+import { type Category } from "../types";
 
 type Props = {
   categories: Category[];
