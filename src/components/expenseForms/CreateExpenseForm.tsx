@@ -70,7 +70,6 @@ export const CreateExpenseForm: React.FC = () => {
     navigate("/budget");
   };
 
-  // if budget does not exist, display create budget button
   return !budgetId ? (
     "create a budget to start tracking expenses"
   ) : (
