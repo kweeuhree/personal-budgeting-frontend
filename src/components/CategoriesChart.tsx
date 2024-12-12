@@ -6,6 +6,28 @@ import { selectAllExpenses, selectCategories, useAppSelector } from "../store";
 import { getChartOptions, SAVINGS_BALANCE, CHECKING_BALANCE } from "../utils";
 import { useGroupedExpenses } from "../hooks";
 
+interface RadioInput {
+  id: string;
+  value: string;
+}
+
+type RadioInputs = Record<string, RadioInput>;
+
+const radioInputs: RadioInputs = {
+  Checking: {
+    id: "checking",
+    value: CHECKING_BALANCE,
+  },
+  Savings: {
+    id: "savings",
+    value: SAVINGS_BALANCE,
+  },
+  All: {
+    id: "all",
+    value: "all",
+  },
+};
+
 export const CategoriesChart = () => {
   const donutRef = useRef<HTMLDivElement | null>(null);
   const expenses = useAppSelector(selectAllExpenses);
@@ -65,36 +87,23 @@ export const CategoriesChart = () => {
   };
 
   return expenses.length ? (
-    <div className="chart-container">
-      <input
-        id="checking-radio"
-        type="radio"
-        name="accountType"
-        value={CHECKING_BALANCE}
-        checked={selectedAccount === CHECKING_BALANCE}
-        onChange={handleChange}
-      />
-      <label htmlFor="checking-radio">Checking</label>
-
-      <input
-        id="savings-radio"
-        type="radio"
-        name="accountType"
-        value={SAVINGS_BALANCE}
-        checked={selectedAccount === SAVINGS_BALANCE}
-        onChange={handleChange}
-      />
-      <label htmlFor="savings-radio">Savings</label>
-
-      <input
-        id="all-radio"
-        type="radio"
-        name="accountType"
-        value="all"
-        checked={selectedAccount === "all"}
-        onChange={handleChange}
-      />
-      <label htmlFor="all-radio">All</label>
+    <div className="w-5/12">
+      <div className="flex justify-center space-x-3">
+        {Object.entries(radioInputs).map(([label, { id, value }]) => (
+          <div key={id + "radio"} className="flex items-center space-x-1">
+            <input
+              id={id}
+              type="radio"
+              name="accountType"
+              value={value}
+              checked={selectedAccount === value}
+              onChange={handleChange}
+              className="w-4 h-4 border-amber accent-navy checked:bg-sun hover:bg-amber focus:ring-2 focus:ring-amber checked:hover:border-sun"
+            />
+            <label htmlFor={id + "radio"}>{label}</label>
+          </div>
+        ))}
+      </div>
 
       <div id="donut" ref={donutRef}></div>
     </div>
