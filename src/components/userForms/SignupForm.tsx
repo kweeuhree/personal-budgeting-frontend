@@ -1,8 +1,9 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { UserSignUp } from "../../types";
+
 import { useSignupMutation } from "../../store";
 import { useRedirectBox } from "../../hooks";
 import { Button } from "../Button";
+import { UserSignUp } from "../../types";
 
 export const SignupForm: React.FC = () => {
   const { formTitle } = useRedirectBox();
