@@ -14,3 +14,4 @@ export * from "./CategoriesChart";
 export * from "./Button";
 export * from "./Chip";
 export * from "./Loading";
+export * from "./Dialog";
