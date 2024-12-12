@@ -37,6 +37,10 @@ export const CreateCategoryForm = () => {
     }
   };
 
+  const handleNavigate = () => {
+    navigate("/categories");
+  };
+
   return (
     <>
       {isSuccess ? "Category created" : error && "error"}
@@ -61,6 +65,9 @@ export const CreateCategoryForm = () => {
         </label>
         <input id="description" type="text" {...register("description", {})} />
         <br />
+        <button type="submit" onClick={handleNavigate}>
+          Cancel
+        </button>
         <button type="submit">Create</button>
       </form>
     </>
