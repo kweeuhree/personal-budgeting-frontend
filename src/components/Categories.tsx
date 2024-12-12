@@ -11,7 +11,7 @@ export const Categories: React.FC<Props> = ({
   handleConfirmDelete,
 }) => {
   return (
-    <table>
+    <table className="mt-4 justify-evenly min-w-full">
       <thead>
         <tr>
           <th>Name</th>

@@ -14,7 +14,7 @@ export const Expenses: React.FC<Props> = ({
   const categories = useAppSelector(selectCategories);
 
   return (
-    <table>
+    <table className="mt-4 justify-evenly min-w-full">
       <thead>
         <tr>
           <th>Amount</th>
