@@ -7,9 +7,15 @@ import {
   deleteCategory,
   useAppDispatch,
 } from "../store";
-import { Categories, CreateCategoryForm } from "../components";
+import { useConfirmDialog } from "../hooks";
+import { Button, Categories, CreateCategoryForm } from "../components";
+
+const confirmStmt = (name: string) => {
+  return `Are you sure you want to permanently delete ${name}?`;
+};
 
 export const CategoriesPage = () => {
+  const { showConfirm, ConfirmDialog } = useConfirmDialog();
   const categories = useAppSelector(selectCategories);
   const [categoryDelete] = useCategoryDeleteMutation();
   const dispatch = useAppDispatch();
@@ -34,16 +40,21 @@ export const CategoriesPage = () => {
     const found = categories.find(
       (cat) => cat.expenseCategoryId === expenseCategoryId
     );
-    const confirmStmt = `Are you sure you want to permanently delete ${name}?`;
-    if (found && confirm(confirmStmt)) {
-      handleDelete(expenseCategoryId);
+    if (found) {
+      showConfirm(confirmStmt(name), () => handleDelete(expenseCategoryId));
     }
   };
 
   return (
-    <>
-      <div>CategoriesPage</div>
-      <button onClick={handleCreateCategory}>Create Category +</button>
+    <div className="flex  flex-col items-center">
+      <header className="flex items-center justify-between min-w-full">
+        <div className="font-medium">Categories</div>
+        <Button
+          buttonType="button"
+          buttonText="Create Category +"
+          onClick={handleCreateCategory}
+        />
+      </header>
       {categories.length > 0 ? (
         <Categories
           categories={categories}
@@ -52,6 +63,7 @@ export const CategoriesPage = () => {
       ) : (
         <CreateCategoryForm />
       )}
-    </>
+      <ConfirmDialog />
+    </div>
   );
 };

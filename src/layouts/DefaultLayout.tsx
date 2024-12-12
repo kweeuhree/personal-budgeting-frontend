@@ -2,6 +2,7 @@ import React from "react";
 import { Outlet, NavLink } from "react-router-dom";
 
 import { useAppDispatch, useLogoutMutation, userLogout } from "../store";
+import { useConfirmDialog } from "../hooks";
 import { Chip } from "../components";
 
 import "./defaultLayout.css";
@@ -15,8 +16,13 @@ const centerNavLinks: { [key: string]: string } = {
 const confirmStmt = "Are you sure you want to log out?";
 
 export const DefaultLayout: React.FC = () => {
+  const { showConfirm, ConfirmDialog } = useConfirmDialog();
   const [logout] = useLogoutMutation();
   const dispatch = useAppDispatch();
+
+  const confirmLogout = () => {
+    showConfirm(confirmStmt, () => () => handleLogout());
+  };
 
   const handleLogout = () => {
     if (confirm(confirmStmt)) {
@@ -48,7 +54,7 @@ export const DefaultLayout: React.FC = () => {
             <NavLink
               key={text}
               className={({ isActive }) =>
-                `content-center ${isActive ? "selected" : "unselected"}`
+                `content-center  ${isActive ? "selected" : "unselected"}`
               }
               to={`/${path}`}
               // ensure that react router differentiates between '/expenses' and '/expenses/create'
@@ -67,12 +73,13 @@ export const DefaultLayout: React.FC = () => {
           >
             Profile
           </NavLink>
-          <Chip onClick={handleLogout} text="Log out" />
+          <Chip onClick={confirmLogout} text="Log out" />
         </div>
       </nav>
       <main className="content-center mt-20">
         <Outlet />
       </main>
+      <ConfirmDialog />
     </div>
   );
 };

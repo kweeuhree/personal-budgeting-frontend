@@ -7,19 +7,22 @@ import {
 } from "../store";
 import { Expenses } from "../components";
 import { Expense } from "../types";
+import { useConfirmDialog } from "../hooks";
+
+const confirmStmt = (amountInDollars: string) => {
+  return `Are you sure you want to permanently delete ${amountInDollars}?`;
+};
 
 export const ExpensesPage = () => {
+  const { showConfirm, ConfirmDialog } = useConfirmDialog();
   const expenses = useAppSelector(selectAllExpenses);
   const [expenseDelete, { isSuccess, error }] = useExpenseDeleteMutation();
   const dispatch = useAppDispatch();
 
   const handleDelete = async (expense: Expense) => {
     try {
-      console.log("attempting delete...");
       const response = await expenseDelete(expense.expenseId).unwrap();
-      dispatch(deleteExpense(expense));
       if (response.ok) {
-        console.log("dispatching delete");
         dispatch(deleteExpense(expense));
       }
     } catch (error) {
@@ -31,15 +34,14 @@ export const ExpensesPage = () => {
 
   const handleConfirmDelete = (expense: Expense, amountInDollars: string) => {
     const found = expenses.find((exp) => exp.expenseId === expense.expenseId);
-    const confirmStmt = `Are you sure you want to permanently delete ${amountInDollars}?`;
-    if (found && confirm(confirmStmt)) {
-      handleDelete(expense);
+    if (found) {
+      showConfirm(confirmStmt(amountInDollars), () => handleDelete(expense));
     }
   };
 
   return (
     <>
-      <div>ExpensesPage</div>
+      <header className="flex min-w-full font-medium">Expenses</header>
       {isSuccess ? "Expense deleted" : error && "Error"}
       {expenses.length > 0 ? (
         <Expenses
@@ -49,6 +51,7 @@ export const ExpensesPage = () => {
       ) : (
         "no expenses"
       )}
+      <ConfirmDialog />
     </>
   );
 };
