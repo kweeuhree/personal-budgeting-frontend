@@ -61,7 +61,7 @@ export const getChartOptions = (categories: Categories) => {
       enabled: true,
     },
     legend: {
-      position: "right",
+      position: "bottom",
       fontFamily: "Inter, sans-serif",
       fontSize: "14px",
     },
