@@ -7,6 +7,9 @@ import {
   useDeleteBudgetMutation,
 } from "../store";
 
+const confirmStmt =
+  "This action cannot be undone. Are you sure that you want to reset budget and expenses?";
+
 export const ProfilePage = () => {
   const dispatch = useAppDispatch();
   const { displayName } = useAppSelector(selectUser);
@@ -16,8 +19,6 @@ export const ProfilePage = () => {
   const greeting = `Hello, ${displayName || "friend"}!`;
 
   const handleDeleteBudget = async () => {
-    const confirmStmt =
-      "This action cannot be undone. Are you sure that you want to reset budget and expenses?";
     if (confirm(confirmStmt)) {
       try {
         await deleteBudget(budgetId);
