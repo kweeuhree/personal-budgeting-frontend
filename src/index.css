@@ -34,13 +34,16 @@ a {
   text-decoration: inherit;
 }
 a:hover {
-  color: var(--color-focus);
+  text-decoration: underline;
+  text-decoration-color: var(--color-focus);
+  text-decoration-thickness: 1px;
 }
 
 body {
   margin: 0;
   display: flex;
   place-items: center;
+  font-size: 1.3rem;
   min-width: 320px;
   min-height: 100vh;
   background:
@@ -59,7 +62,7 @@ button {
   border-radius: 8px;
   border: 1px solid var(--color-navy);
   padding: 0.6em 1.2em;
-  font-size: 1em;
+  font-size: 0.9em;
   font-weight: 500;
   font-family: inherit;
   background-color: var(--color-bg);
@@ -69,11 +72,12 @@ button {
   box-shadow: var(--box-shadow);
 }
 button:hover {
-  border-color: var(--color-focus);
+  border-color: var(--color-amber);
+  color: var(--color-focus);
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto var(--color-focus);
+  outline: none;
 }
 
 @media (prefers-color-scheme: light) {
@@ -118,7 +122,7 @@ label {
   margin-left: 0.75rem;
   justify-self: left;
   margin-bottom: 0.5rem;
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 500;
   color: var(--color-charcoal);
 }
