@@ -17,7 +17,7 @@ export const Budget: React.FC<Props> = ({ handleUpdateBalance, budget }) => {
   } = budget;
 
   return (
-    <div className="budget-container">
+    <div className="w-7/12">
       <div>
         Checking balance: {checkingBalance}
         <span
