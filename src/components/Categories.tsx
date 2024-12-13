@@ -1,10 +1,13 @@
-import { type Categories as CategoriesType } from "../types";
 import { separateCents } from "../utils";
+import { TableHeads } from ".";
+import { type Categories as CategoriesType } from "../types";
 
 type Props = {
   categories: CategoriesType;
   handleConfirmDelete: (expenseCategoryId: string, name: string) => void;
 };
+
+const tableHeads = ["Name", "Description", "Total Spent", "Action"];
 
 export const Categories: React.FC<Props> = ({
   categories,
@@ -14,10 +17,7 @@ export const Categories: React.FC<Props> = ({
     <table className="mt-4 justify-evenly min-w-full">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Total Spent</th>
-          <th>Actions</th>
+          <TableHeads tableHeads={tableHeads} />
         </tr>
       </thead>
       <tbody>

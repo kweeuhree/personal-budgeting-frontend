@@ -1,11 +1,21 @@
 import { useAppSelector, selectCategories } from "../store";
 import { getCategoryName, separateCents } from "../utils";
+import { TableHeads } from ".";
 import { Expense, type Expenses as ExpensesType } from "../types";
 
 type Props = {
   handleConfirmDelete: (expense: Expense, amountInDollars: string) => void;
   expenses: ExpensesType;
 };
+
+const tableHeads = [
+  "Amount",
+  "Description",
+  "Category",
+  "Account",
+  "Created At",
+  "Action",
+];
 
 export const Expenses: React.FC<Props> = ({
   handleConfirmDelete,
@@ -14,15 +24,10 @@ export const Expenses: React.FC<Props> = ({
   const categories = useAppSelector(selectCategories);
 
   return (
-    <table className="mt-4 justify-evenly min-w-full">
-      <thead>
+    <table className="flex flex-col mt-4">
+      <thead className="red-bd flex min-w-full">
         <tr>
-          <th>Amount</th>
-          <th>Description</th>
-          <th>Category</th>
-          <th>Account</th>
-          <th>Created At</th>
-          <th>Action</th>
+          <TableHeads tableHeads={tableHeads} />
         </tr>
       </thead>
       <tbody>
@@ -42,9 +47,13 @@ export const Expenses: React.FC<Props> = ({
           return (
             <tr key={expenseId}>
               <td>{amountInDollars}</td>
-              <td className={!description ? "invisible" : ""}>{description}</td>
+              <td
+                className={"hidden md:block" + !description ? "invisible" : ""}
+              >
+                {description}
+              </td>
               <td>{categoryName}</td>
-              <td>{account}</td>
+              <td className="hidden md:block">{account}</td>
               <td>{creationTime}</td>
               <td>
                 {/* Delete button */}
