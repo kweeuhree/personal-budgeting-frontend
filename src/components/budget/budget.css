@@ -1,0 +1,19 @@
+.balance {
+  padding-block: 1rem;
+  border: 1px solid var(--color-blue-sage);
+  border-radius: 0.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 1.5rem;
+  font-weight: 500;
+  font-size: 1.2rem;
+  box-shadow: var(--box-shadow);
+}
+
+.total {
+  border: 1px solid var(--color-blue-sage);
+  border-radius: 0.35rem;
+  padding-block: 0.5rem;
+  padding-inline: 2rem;
+}
