@@ -1,0 +1,11 @@
+.selected {
+  text-decoration: underline;
+  text-decoration-color: var(--color-amber);
+  text-decoration-thickness: 2px;
+}
+
+.unselected {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 2px;
+}
