@@ -87,7 +87,7 @@ export const CategoriesChart = () => {
   };
 
   return expenses.length ? (
-    <div className="w-5/12">
+    <div className="md:w-5/12 min-w-full flex flex-col content-center">
       <div className="flex justify-center space-x-3">
         {Object.entries(radioInputs).map(([label, { id, value }]) => (
           <div key={id + "radio"} className="flex items-center space-x-1">
@@ -105,7 +105,7 @@ export const CategoriesChart = () => {
         ))}
       </div>
 
-      <div id="donut" ref={donutRef}></div>
+      <div className="min-w-full" id="donut" ref={donutRef}></div>
     </div>
   ) : (
     <button onClick={handleNavigate}>Create an expense +</button>
