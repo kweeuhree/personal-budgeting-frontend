@@ -1,4 +1,4 @@
-import { getHeaderStyle } from "../utils";
+import { getHeaderStyle } from "../styles";
 
 type Props = {
   tableHeads: string[];
