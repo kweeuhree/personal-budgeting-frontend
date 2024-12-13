@@ -65,6 +65,21 @@ export const getChartOptions = (categories: Categories) => {
       fontFamily: "Inter, sans-serif",
       fontSize: "14px",
     },
+    responsive: [
+      {
+        breakpoint: 1000,
+        options: {
+          plotOptions: {
+            pie: {
+              size: "100%",
+            },
+          },
+          legend: {
+            position: "right",
+          },
+        },
+      },
+    ],
     yaxis: {
       labels: {
         formatter: function (value: number) {
