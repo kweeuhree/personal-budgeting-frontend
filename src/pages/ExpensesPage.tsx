@@ -40,7 +40,7 @@ export const ExpensesPage = () => {
   };
 
   return (
-    <>
+    <div className="flex flex-col items-center min-w-full">
       <header className="flex min-w-full font-medium">Expenses</header>
       {isSuccess ? "Expense deleted" : error && "Error"}
       {expenses.length > 0 ? (
@@ -52,6 +52,6 @@ export const ExpensesPage = () => {
         "no expenses"
       )}
       <ConfirmDialog />
-    </>
+    </div>
   );
 };
