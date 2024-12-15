@@ -14,7 +14,7 @@ export const Budget: React.FC<Props> = ({ handleUpdateBalance, budget }) => {
   const { checkingBalance, savingsBalance, budgetTotal, totalSpent } = budget;
 
   return (
-    <div className="5/12 md:w-7/12 bg-white border rounded-md shadow-md px-2 py-6 lg:py-10">
+    <div className="sm:w-5/12 md:w-7/12 lg:w-7/12 bg-white border rounded-md shadow-md mx-2 px-2 py-6 lg:mx-10 lg:py-10">
       <h3 className="flex indent-8 font-medium shadow-sm">Budget</h3>
       {/* Budget accounts and totals */}
       <div>
