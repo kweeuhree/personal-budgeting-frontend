@@ -44,7 +44,7 @@ export const ProfilePage = () => {
   };
 
   const confirmLogout = () => {
-    showConfirm(confirmStmt.logout, () => () => handleLogout());
+    showConfirm(confirmStmt.logout, () => handleLogout());
   };
 
   const handleLogout = () => {
