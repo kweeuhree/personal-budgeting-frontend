@@ -18,7 +18,7 @@ export const getChartOptions = (categories: Categories) => {
   const totalSums = categories.map((cat) => cat.totalSum);
   return {
     series: totalSums,
-    colors: colors,
+    colors,
     chart: {
       height: 320,
       width: "100%",
