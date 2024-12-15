@@ -3,7 +3,7 @@ import { MouseEventHandler } from "react";
 type Props = {
   buttonType: "button" | "submit";
   buttonText: string;
-  onClick: MouseEventHandler;
+  onClick?: MouseEventHandler;
   autofocus?: boolean;
 };
 
