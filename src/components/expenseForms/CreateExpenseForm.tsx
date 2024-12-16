@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import {
@@ -11,18 +10,20 @@ import {
   createCategory,
   selectBudget,
 } from "../../store";
-import { Expense, type StringInput } from "../../types";
-import { AccountFieldset, CategoriesDropdown } from "..";
+import { useHandleNavigate } from "../../hooks";
 import { getCategoryId, convertStringtoCents } from "../../utils";
+import { AccountFieldset, Button, CategoriesDropdown } from "..";
+import { Expense, type StringInput } from "../../types";
+import { responsiveHeader } from "../../styles";
 
 export const CreateExpenseForm: React.FC = () => {
+  const { handleNavigate } = useHandleNavigate();
   const [expenseCreate, { isSuccess, error }] = useExpenseCreateMutation();
   const [categoryCreate] = useCategoryCreateMutation();
   const { budgetId } = useAppSelector(selectBudget);
   const categories = useAppSelector(selectCategories);
   const categoriesExist = categories.length > 0;
 
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const {
@@ -59,15 +60,11 @@ export const CreateExpenseForm: React.FC = () => {
       const createdExpense = await expenseCreate(newExpense).unwrap();
 
       dispatch(createExpense(createdExpense));
-      handleNavigateToBudget();
+      handleNavigate("/budget");
     } catch (error) {
       console.error("Error occurred while creating expense:", error);
       throw new Error(error instanceof Error ? error.message : "Unknown error");
     }
-  };
-
-  const handleNavigateToBudget = () => {
-    navigate("/budget");
   };
 
   return !budgetId ? (
@@ -75,52 +72,66 @@ export const CreateExpenseForm: React.FC = () => {
   ) : (
     <>
       {isSuccess ? "Expense created" : error && "error"}
-      <h1>Create Expense</h1>
-      <form id="createExpenseForm" onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="description">
-          Description <span>(optional)</span>
-        </label>
-        <input id="description" type="text" {...register("description", {})} />
+      <h3 className={responsiveHeader}>Create Expense</h3>
+      <form
+        id="createExpenseForm"
+        className="my-4 sm:my-10"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <div className="grid space-y-4">
+          <label htmlFor="description">
+            Description <span>(optional)</span>
+          </label>
+          <input
+            id="description"
+            type="text"
+            {...register("description", {})}
+          />
 
-        <br />
-        <label htmlFor="value">Value</label>
-        <input
-          id="value"
-          type="number"
-          min="0"
-          {...register("value", {
-            required: "This field is required",
-          })}
-        />
-        {errors.value && <span>{errors.value.toString()}</span>}
-        <br />
-        {categoriesExist ? (
-          <CategoriesDropdown
+          <br />
+          <label htmlFor="value">Value</label>
+          <input
+            id="value"
+            type="number"
+            min="0"
+            {...register("value", {
+              required: "This field is required",
+            })}
+          />
+          {errors.value && <span>{errors.value.toString()}</span>}
+          <br />
+          {categoriesExist ? (
+            <CategoriesDropdown
+              register={register}
+              errors={errors}
+              categories={categories}
+            />
+          ) : (
+            <>
+              <label htmlFor="category">Category</label>
+              <input
+                id="category"
+                type="text"
+                {...register("category", {
+                  required: "Category is required",
+                })}
+              />
+            </>
+          )}
+          <AccountFieldset
             register={register}
             errors={errors}
-            categories={categories}
+            name={"expenseType"}
           />
-        ) : (
-          <>
-            <label htmlFor="category">Category</label>
-            <input
-              id="category"
-              type="text"
-              {...register("category", {
-                required: "Category is required",
-              })}
-            />
-          </>
-        )}
-        <AccountFieldset
-          register={register}
-          errors={errors}
-          name={"expenseType"}
-        />
-        <button type="button" onClick={handleNavigateToBudget}>
-          Cancel
-        </button>
-        <button type="submit">Create</button>
+        </div>
+        <div className="flex items-center justify-around mt-4">
+          <Button
+            buttonType="button"
+            buttonText="Cancel"
+            onClick={() => handleNavigate("/expenses")}
+          />
+          <Button buttonType="submit" buttonText="Create" />
+        </div>
       </form>
     </>
   );
