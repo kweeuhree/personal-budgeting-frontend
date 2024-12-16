@@ -1,7 +1,10 @@
-const hideOnSmallScreen = "hidden md:block";
+const hideOnSmallScreen = "hidden md:table-cell";
 
-const getHeaderVisibility = (header: string) =>
+const responsiveThStyle =
+  "table-cell font-medium md:font-bold lg:px-4 sm:px-none py-2 border-b";
+
+export const getHeaderVisibility = (header: string) =>
   header === "Description" || header === "Account" ? hideOnSmallScreen : "";
 
 export const getHeaderStyle = (header: string) =>
-  `font-medium md:font-bold ${getHeaderVisibility(header)}`;
+  `${responsiveThStyle} ${getHeaderVisibility(header)}`;
