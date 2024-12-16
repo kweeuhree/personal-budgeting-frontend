@@ -11,6 +11,7 @@ import {
 } from "../../store";
 import { convertStringtoCents } from "../../utils";
 import { AccountFieldset } from "../AccountFieldset";
+import { responsiveHeader } from "../../styles";
 
 type Props = {
   balanceType: string;
@@ -65,16 +66,18 @@ export const UpdateBudgetForm: React.FC<Props> = (props) => {
   return (
     <>
       {isSuccess ? "Budget updated" : error && "error"}
-      <h1>Update Balance</h1>
+      <h3 className={responsiveHeader}>Update Balance</h3>
       <form id="updateBudgetForm" onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="balanceValue">Value</label>
-        <input
-          type="number"
-          min="0"
-          {...register("balanceValue", {
-            required: "This field is required",
-          })}
-        />
+        <div className="grid mx-2 mb-4">
+          <label htmlFor="balanceValue">Value</label>
+          <input
+            type="number"
+            min="0"
+            {...register("balanceValue", {
+              required: "This field is required",
+            })}
+          />
+        </div>
         <AccountFieldset
           balanceType={balanceType}
           name={"balanceType"}
@@ -83,31 +86,39 @@ export const UpdateBudgetForm: React.FC<Props> = (props) => {
         />
         <br />
 
-        <fieldset>
-          <legend>Update</legend>
-          <input
-            id="add"
-            type="radio"
-            value="add"
-            {...register("update", { required: "Select an update type" })}
-          />
-          <label htmlFor="add">Add</label>
-
-          <input
-            id="subtract"
-            type="radio"
-            value="subtract"
-            {...register("update", { required: "Select an update type" })}
-          />
-          <label htmlFor="subtract">Subtract</label>
-          <br />
-          {errors.update && "Select an update type"}
+        <fieldset className="bg-bg p-1 border rounded-md">
+          <legend className="bg-bg px-4 border rounded-md text-md font-medium">
+            Update
+          </legend>
+          <div className="flex items-center justify-around">
+            <div className="flex items-center">
+              <input
+                id="add"
+                type="radio"
+                value="add"
+                {...register("update", { required: "Select an update type" })}
+              />
+              <label htmlFor="add">Add</label>
+            </div>
+            <div className="flex items-center">
+              <input
+                id="subtract"
+                type="radio"
+                value="subtract"
+                {...register("update", { required: "Select an update type" })}
+              />
+              <label htmlFor="subtract">Subtract</label>
+            </div>
+            {errors.update && "Select an update type"}
+          </div>
         </fieldset>
-        <br />
-        <button type="button" onClick={handleCancelUpdate}>
-          Cancel
-        </button>
-        <button type="submit">Update</button>
+
+        <div className="flex justify-evenly my-5">
+          <button type="button" onClick={handleCancelUpdate}>
+            Cancel
+          </button>
+          <button type="submit">Update</button>
+        </div>
       </form>
     </>
   );
