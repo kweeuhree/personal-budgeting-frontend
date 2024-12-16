@@ -8,7 +8,7 @@ import "./unauthorizedLayout.css";
 export const UnauthorizedLayout: React.FC = () => {
   const { redirectMessage, path, buttonText } = useRedirectBox();
   return (
-    <div className="unauth-wrapper flex flex-col min-h-[90vh] justify-between">
+    <div className="unauth-wrapper flex flex-col min-h-full justify-between">
       <header>
         <h1 className="mb-4">
           Budget{" "}
@@ -22,12 +22,12 @@ export const UnauthorizedLayout: React.FC = () => {
         </h4>
       </header>
 
-      <main>
+      <main className="flex items-center justify-center">
         <Outlet />
       </main>
 
       {/* Redirect box */}
-      <div className="flex my-10 justify-center gap-2.5">
+      <div className="flex mb-10 justify-center gap-2.5">
         <div>{redirectMessage}</div>
         <Link to={path} className="underline">
           {buttonText}

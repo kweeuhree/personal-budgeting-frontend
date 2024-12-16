@@ -9,8 +9,17 @@ const centerNavLinks: { [key: string]: string } = {
 };
 
 export const NavBar = () => {
+  const isNavLinkHidden = (text: string) => {
+    if (
+      text === centerNavLinks.expenses ||
+      text === centerNavLinks.categories
+    ) {
+      return true;
+    }
+  };
+
   return (
-    <nav className="flex justify-around min-w-full lg:gap-14 sm:gap-3 text-base">
+    <nav className="sticky top-0 z-10 flex justify-around min-w-full lg:gap-14 sm:gap-3 mb-10 sm:mb-6  lg:p-8 md:p-4 sm:p-1 text-lg sm:text-md">
       <div className="content-center">
         <NavLink
           to="/budget"
@@ -24,7 +33,9 @@ export const NavBar = () => {
           <NavLink
             key={text}
             className={({ isActive }) =>
-              `content-center  ${isActive ? "selected" : "unselected"}`
+              `${isNavLinkHidden(text) ? "hidden md:block lg:block" : "block"} ${
+                isActive ? "selected" : "unselected"
+              }`
             }
             to={`/${path}`}
             // ensure that react router differentiates between '/expenses' and '/expenses/create'
