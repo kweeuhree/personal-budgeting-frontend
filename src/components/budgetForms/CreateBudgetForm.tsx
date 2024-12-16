@@ -43,11 +43,8 @@ export const CreateBudgetForm: React.FC = () => {
 
   const handleCreateBudget = async (newBudget: StringInput) => {
     try {
-      console.log("Received new budget", newBudget);
       const processedBudget = processBudget(newBudget);
-      console.log("Processed new budget", processedBudget);
       const createdBudget = await createBudget(processedBudget).unwrap();
-      console.log("Created new budget", createdBudget);
       dispatch(budgetCreate(createdBudget));
       reset();
       navigate("/budget");
