@@ -1,10 +1,10 @@
 import { useRef, useEffect, useState, ChangeEvent } from "react";
-import { useNavigate } from "react-router-dom";
 import ApexCharts from "apexcharts";
 
 import { selectAllExpenses, selectCategories, useAppSelector } from "../store";
 import { getChartOptions, SAVINGS_BALANCE, CHECKING_BALANCE } from "../utils";
-import { useGroupedExpenses } from "../hooks";
+import { useGroupedExpenses, useHandleNavigate } from "../hooks";
+import { Button } from "./Button";
 
 interface RadioInput {
   id: string;
@@ -29,19 +29,14 @@ const radioInputs: RadioInputs = {
 };
 
 export const CategoriesChart = () => {
+  const { handleNavigate } = useHandleNavigate();
   const donutRef = useRef<HTMLDivElement | null>(null);
   const expenses = useAppSelector(selectAllExpenses);
   const categories = useAppSelector(selectCategories);
   const { groupedSavings, groupedChecking } = useGroupedExpenses();
   const [selectedAccount, setSelectedAccount] = useState<string | null>(null);
 
-  const navigate = useNavigate();
-
   const totalSums = categories.map((cat) => cat.totalSum);
-
-  const handleNavigate = () => {
-    navigate("/expenses/create");
-  };
 
   useEffect(() => {
     if (donutRef.current && categories) {
@@ -87,7 +82,7 @@ export const CategoriesChart = () => {
   };
 
   return expenses.length ? (
-    <div className="md:w-5/12 min-w-full flex flex-col content-center">
+    <div className="md:w-5/12 lg:w-5/12 sm:w-full flex flex-col content-center">
       <div className="flex justify-center space-x-3">
         {Object.entries(radioInputs).map(([label, { id, value }]) => (
           <div key={id + "radio"} className="flex items-center space-x-1">
@@ -108,6 +103,10 @@ export const CategoriesChart = () => {
       <div className="min-w-full" id="donut" ref={donutRef}></div>
     </div>
   ) : (
-    <button onClick={handleNavigate}>Create an expense +</button>
+    <Button
+      buttonType="button"
+      buttonText="Create Expense +"
+      onClick={() => handleNavigate("/expenses/create")}
+    />
   );
 };
