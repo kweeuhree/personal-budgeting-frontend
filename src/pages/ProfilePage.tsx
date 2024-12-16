@@ -10,7 +10,8 @@ import {
 } from "../store";
 import { useConfirmDialog } from "../hooks";
 
-import { Chip } from "../components";
+import { Button, Chip } from "../components";
+import { NavLink } from "react-router-dom";
 
 const confirmStmt = {
   deleteBudget:
@@ -59,18 +60,35 @@ export const ProfilePage = () => {
   };
 
   return (
-    <>
-      <div>
+    <div className="min-h-full flex flex-col items-center justify-around">
+      <div className="flex flex-col gap-10">
         <div>{error ? "there was an error" : isSuccess && "budget reset"}</div>
-        <div>{greeting}</div>
+        <h1>{greeting}</h1>
         {budgetId ? (
-          <button onClick={handleConfirmDelete}>Reset budget</button>
+          <div className="flex flex-col gap-5 mb-2">
+            <div className="flex flex-col sm:hidden gap-5">
+              <NavLink className="content-center" to="/expenses">
+                <Button buttonText="View expenses" buttonType="button" />
+              </NavLink>
+              <NavLink className="content-center" to="/categories">
+                <Button buttonText="View categories" buttonType="button" />
+              </NavLink>
+            </div>
+            <div>
+              <Button
+                buttonText="Reset budget"
+                buttonType="submit"
+                onClick={handleConfirmDelete}
+              />
+            </div>
+          </div>
         ) : (
           "create a budget to start tracking expenses"
         )}
       </div>
       <Chip onClick={confirmLogout} text="Log out" />
+
       <ConfirmDialog />
-    </>
+    </div>
   );
 };
