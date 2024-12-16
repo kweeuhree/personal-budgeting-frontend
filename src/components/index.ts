@@ -13,6 +13,6 @@ export * from "./expenseForms";
 export * from "./Expenses";
 export * from "./Loading";
 export * from "./ProtectedRoute";
-export * from "./TableHeads";
+export * from "./ResponsiveTable";
 export * from "./userForms/LoginForm";
 export * from "./userForms/SignupForm";
