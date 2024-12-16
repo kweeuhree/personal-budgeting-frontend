@@ -42,7 +42,7 @@ export const SignupForm: React.FC = () => {
       {isError && error && (
         <p className="error-message">This email address is already is use</p>
       )}
-      <div className="grid">
+      <div className="grid space-y-4">
         <label htmlFor="displayName">Display name:</label>
         <input
           id="displayName"
@@ -51,9 +51,8 @@ export const SignupForm: React.FC = () => {
             required: "Display name is required",
           })}
         />
-        <br />
         {errors.displayName && <span>{errors.displayName.message}</span>}
-        <br />
+
         <label htmlFor="email">Email:</label>
         <input
           id="email"
@@ -66,9 +65,8 @@ export const SignupForm: React.FC = () => {
             },
           })}
         />
-        <br />
         {errors.userEmail && <span>{errors.userEmail.message}</span>}
-        <br />
+
         <label htmlFor="password">Password:</label>
         <input
           id="password"
@@ -81,9 +79,8 @@ export const SignupForm: React.FC = () => {
             },
           })}
         />
-        <br />
         {errors.password && <span>This field is required</span>}
-        <br />
+
         <label htmlFor="repeatPassword">Repeat password:</label>
         <input
           id="repeatPassword"
@@ -93,7 +90,6 @@ export const SignupForm: React.FC = () => {
             validate: (value) => value === password || "Passwords do not match",
           })}
         />
-        <br />
         {errors.repeatPassword && <span>{errors.repeatPassword.message}</span>}
         <br />
       </div>
