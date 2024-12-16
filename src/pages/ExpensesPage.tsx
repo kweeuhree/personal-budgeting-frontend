@@ -5,26 +5,25 @@ import {
   useExpenseDeleteMutation,
   deleteExpense,
 } from "../store";
-import { Expenses } from "../components";
+import { Button, CreateExpenseForm, Expenses } from "../components";
 import { Expense } from "../types";
-import { useConfirmDialog } from "../hooks";
+import { useConfirmDialog, useHandleNavigate } from "../hooks";
 
 const confirmStmt = (amountInDollars: string) => {
   return `Are you sure you want to permanently delete ${amountInDollars}?`;
 };
 
 export const ExpensesPage = () => {
+  const { handleNavigate } = useHandleNavigate();
   const { showConfirm, ConfirmDialog } = useConfirmDialog();
   const expenses = useAppSelector(selectAllExpenses);
-  const [expenseDelete, { isSuccess, error }] = useExpenseDeleteMutation();
+  const [expenseDelete] = useExpenseDeleteMutation();
   const dispatch = useAppDispatch();
 
   const handleDelete = async (expense: Expense) => {
     try {
-      const response = await expenseDelete(expense.expenseId).unwrap();
-      if (response.ok) {
-        dispatch(deleteExpense(expense));
-      }
+      await expenseDelete(expense.expenseId).unwrap();
+      dispatch(deleteExpense(expense));
     } catch (error) {
       throw new Error(
         `Failed to delete expense: ${error instanceof Error ? error.message : error}`
@@ -40,16 +39,23 @@ export const ExpensesPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center min-w-full">
-      <header className="flex min-w-full font-medium">Expenses</header>
-      {isSuccess ? "Expense deleted" : error && "Error"}
+    <div className="flex flex-col items-center min-w-full min-h-full">
+      <header className="flex items-center justify-between min-w-full px-2 mt-16 sm:mt-3">
+        <div className="font-medium">Expenses</div>
+        <Button
+          buttonType="button"
+          buttonText="Create Expense +"
+          onClick={() => handleNavigate("/expenses/create")}
+        />
+      </header>
+
       {expenses.length > 0 ? (
         <Expenses
-          handleConfirmDelete={handleConfirmDelete}
           expenses={expenses}
+          handleConfirmDelete={handleConfirmDelete}
         />
       ) : (
-        "no expenses"
+        <CreateExpenseForm />
       )}
       <ConfirmDialog />
     </div>
