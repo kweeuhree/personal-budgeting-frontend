@@ -59,7 +59,7 @@ export const LoginForm: React.FC = () => {
           className="my-10"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="grid">
+          <div className="grid space-y-4">
             <label htmlFor="email">Email:</label>
             <input
               id="email"
@@ -73,7 +73,7 @@ export const LoginForm: React.FC = () => {
               })}
             />
             {errors.userEmail && <span>{errors.userEmail.message}</span>}
-            <br />
+
             <label htmlFor="password">Password:</label>
             <input
               id="password"
@@ -86,7 +86,6 @@ export const LoginForm: React.FC = () => {
                 },
               })}
             />
-            <br />
             {errors.password && <span>This field is required</span>}
             <br />
           </div>
