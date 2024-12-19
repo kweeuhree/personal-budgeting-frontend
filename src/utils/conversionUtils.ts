@@ -20,9 +20,14 @@ export const formatBudget = (budget: PartialBudget) => {
 };
 
 export const separateCents = (value: number) => {
-  const stringValue = value.toString();
-  const dollarValue = stringValue.slice(0, -2);
-  const centsValue = stringValue.slice(-2);
-  const update = parseFloat(`${dollarValue}.${centsValue}`);
-  return update.toFixed(2);
+  // const stringValue = value.toString();
+  // const dollarValue = stringValue.slice(0, -2);
+  // const centsValue = stringValue.slice(-2);
+  // const update = parseFloat(`${dollarValue}.${centsValue}`);
+  // return update.toFixed(2);
+  const numericValue = value / 100;
+  return numericValue.toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
 };
