@@ -14,7 +14,7 @@ export const Categories: React.FC<Props> = ({
   categories,
   handleConfirmDelete,
 }) => {
-  const getTableData = (categories) => {
+  const getTableData = (categories: CategoriesType) => {
     return categories.map((cat) => {
       const { expenseCategoryId, name, description, totalSum } = cat;
 

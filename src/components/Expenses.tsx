@@ -24,7 +24,7 @@ export const Expenses: React.FC<Props> = ({
 }) => {
   const categories = useAppSelector(selectCategories);
 
-  const getTableData = (expenses) => {
+  const getTableData = (expenses: ExpensesType) => {
     return expenses.map((exp) => {
       const {
         expenseId,
