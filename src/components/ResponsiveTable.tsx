@@ -16,8 +16,6 @@ type Props = {
 
 export const ResponsiveTable: React.FC<Props> = ({ tableHeads, tableData }) => {
   const [columnHover, setColumnHover] = useState<number>(-1);
-  console.log("Table data:");
-  console.log(tableData);
 
   const handleMouseEnter = (index: number) => {
     setColumnHover(index);
