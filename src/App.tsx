@@ -1,7 +1,5 @@
-import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import { useAppDispatch, fetchCsrfToken, setCsrfToken } from "./store";
 import { UnauthorizedLayout, DefaultLayout } from "./layouts";
 import {
   MainPage,
@@ -21,22 +19,6 @@ import {
 import "./App.css";
 
 function App() {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    const fetchToken = async () => {
-      try {
-        // destructure the token from dispatch action
-        const { payload: token } = await dispatch(fetchCsrfToken());
-        dispatch(setCsrfToken(token));
-      } catch (error) {
-        console.error("Failed to fetch CSRF token:", error);
-      }
-    };
-
-    fetchToken();
-  }, [dispatch]);
-
   return (
     <Routes>
       {/* not protected routes */}

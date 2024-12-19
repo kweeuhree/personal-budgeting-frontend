@@ -1,8 +1,15 @@
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 
-import { budgetUpdate, useLoginMutation, userLogin } from "../../store";
+import {
+  budgetUpdate,
+  fetchCsrfToken,
+  setCsrfToken,
+  useAppDispatch,
+  useLoginMutation,
+  userLogin,
+} from "../../store";
 import { UserLogIn } from "../../types";
 import { useRedirectBox } from "../../hooks";
 import { Button, Loading } from "..";
@@ -11,7 +18,19 @@ export const LoginForm: React.FC = () => {
   const { formTitle } = useRedirectBox();
   const [login, { isLoading, error }] = useLoginMutation();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+
+  // const dispatch = useAppDispatch();
+
+  const fetchToken = async () => {
+    try {
+      // destructure the token from dispatch action
+      const { payload: token } = await dispatch(fetchCsrfToken());
+      dispatch(setCsrfToken(token as string));
+    } catch (error) {
+      console.error("Failed to fetch CSRF token:", error);
+    }
+  };
 
   const {
     register,
@@ -27,6 +46,7 @@ export const LoginForm: React.FC = () => {
 
   const handleLogin = async (userData: UserLogIn) => {
     try {
+      await fetchToken();
       const response = await login({
         email: userData.userEmail,
         password: userData.password,
