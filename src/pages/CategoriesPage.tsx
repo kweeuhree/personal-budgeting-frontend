@@ -9,7 +9,7 @@ import { useConfirmDialog, useHandleNavigate } from "../hooks";
 import { Button, Categories, CreateCategoryForm } from "../components";
 
 const confirmStmt = (name: string) => {
-  return `Are you sure you want to permanently delete ${name}?`;
+  return `This action cannot be undone. Are you sure you want to permanently delete ${name} and associated expenses?`;
 };
 
 export const CategoriesPage = () => {
