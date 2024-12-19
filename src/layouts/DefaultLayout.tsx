@@ -7,7 +7,7 @@ export const DefaultLayout: React.FC = () => {
   return (
     <div className="flex flex-col min-h-full min-w-full ">
       <NavBar />
-      <main className="flex flex-col items-center justify-stretch lg:mt-20 md:mt-15 min-w-full">
+      <main className="flex flex-col items-center justify-stretch lg:mt-15 md:mt-15 min-w-full">
         <Outlet />
       </main>
     </div>
