@@ -82,7 +82,7 @@ export const CategoriesChart = () => {
   };
 
   return expenses.length ? (
-    <div className="md:w-5/12 lg:w-5/12 sm:w-full flex flex-col content-center">
+    <div className="md:w-5/12 lg:w-5/12 sm:w-full flex flex-col items-center">
       <div className="flex justify-center space-x-3">
         {Object.entries(radioInputs).map(([label, { id, value }]) => (
           <div key={id + "radio"} className="flex items-center space-x-1">

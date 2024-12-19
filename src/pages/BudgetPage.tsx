@@ -18,7 +18,7 @@ export const BudgetPage = () => {
   return editMode ? (
     <UpdateBudgetForm {...formProps} setEditMode={setEditMode} />
   ) : (
-    <div className="min-w-full min-h-full flex items-start md:gap-10 lg:gap-1 gap-10 flex-col sm:flex-row">
+    <div className="min-w-full min-h-full flex flex-col sm:flex-row sm:mt-20 sm:items-center md:gap-10 lg:gap-1 gap-10 md:items-start lg:items-start">
       <Budget
         handleUpdateBalance={handleUpdateBalance}
         budget={formattedBudget}
