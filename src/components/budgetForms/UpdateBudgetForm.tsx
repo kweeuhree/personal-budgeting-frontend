@@ -12,6 +12,7 @@ import {
 import { convertStringtoCents } from "../../utils";
 import { AccountFieldset } from "../AccountFieldset";
 import { responsiveHeader } from "../../styles";
+import { ValueInput } from "../ValueInput";
 
 type Props = {
   balanceType: string;
@@ -68,19 +69,11 @@ export const UpdateBudgetForm: React.FC<Props> = (props) => {
       {isSuccess ? "Budget updated" : error && "error"}
       <h3 className={responsiveHeader}>Update Balance</h3>
       <form id="updateBudgetForm" onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid mx-2 mb-4">
-          <label htmlFor="balanceValue">Value</label>
-          <input
-            type="number"
-            min="0"
-            {...register("balanceValue", {
-              required: "This field is required",
-            })}
-          />
-        </div>
+        <ValueInput name="balanceValue" register={register} errors={errors} />
+
         <AccountFieldset
           balanceType={balanceType}
-          name={"balanceType"}
+          name="balanceType"
           register={register}
           errors={errors}
         />
@@ -90,24 +83,26 @@ export const UpdateBudgetForm: React.FC<Props> = (props) => {
           <legend className="bg-bg px-4 border rounded-md text-md font-medium">
             Update
           </legend>
-          <div className="flex items-center justify-around">
-            <div className="flex items-center">
-              <input
-                id="add"
-                type="radio"
-                value="add"
-                {...register("update", { required: "Select an update type" })}
-              />
-              <label htmlFor="add">Add</label>
-            </div>
-            <div className="flex items-center">
-              <input
-                id="subtract"
-                type="radio"
-                value="subtract"
-                {...register("update", { required: "Select an update type" })}
-              />
-              <label htmlFor="subtract">Subtract</label>
+          <div className="flex flex-col items-center justify-around">
+            <div className="flex items-center justify-evenly min-w-full">
+              <div className="flex items-center">
+                <input
+                  id="add"
+                  type="radio"
+                  value="add"
+                  {...register("update", { required: "Select an update type" })}
+                />
+                <label htmlFor="add">Add</label>
+              </div>
+              <div className="flex items-center">
+                <input
+                  id="subtract"
+                  type="radio"
+                  value="subtract"
+                  {...register("update", { required: "Select an update type" })}
+                />
+                <label htmlFor="subtract">Subtract</label>
+              </div>
             </div>
             {errors.update && "Select an update type"}
           </div>

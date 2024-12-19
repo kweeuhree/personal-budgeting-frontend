@@ -11,20 +11,45 @@ import {
   selectBudget,
 } from "../../store";
 import { useHandleNavigate } from "../../hooks";
-import { getCategoryId, convertStringtoCents } from "../../utils";
-import { AccountFieldset, Button, CategoriesDropdown } from "..";
+import {
+  getCategoryId,
+  convertStringtoCents,
+  separateCents,
+  CHECKING_BALANCE,
+  SAVINGS_BALANCE,
+} from "../../utils";
+import { AccountFieldset, Button, CategoriesDropdown, ValueInput } from "..";
 import { Expense, type StringInput } from "../../types";
 import { responsiveHeader } from "../../styles";
+import { useState } from "react";
 
 export const CreateExpenseForm: React.FC = () => {
   const { handleNavigate } = useHandleNavigate();
   const [expenseCreate, { isSuccess, error }] = useExpenseCreateMutation();
   const [categoryCreate] = useCategoryCreateMutation();
-  const { budgetId } = useAppSelector(selectBudget);
+  const [insufficientUi, setInsufficientUi] = useState(false);
+  const {
+    budgetId,
+    savingsBalance = 0,
+    checkingBalance = 0,
+  } = useAppSelector(selectBudget);
   const categories = useAppSelector(selectCategories);
   const categoriesExist = categories.length > 0;
 
   const dispatch = useAppDispatch();
+
+  const isInsufficient = (amountInCents: number, balanceType: string) => {
+    switch (balanceType) {
+      case CHECKING_BALANCE:
+        return amountInCents > checkingBalance;
+      case SAVINGS_BALANCE:
+        return amountInCents > savingsBalance;
+      default:
+        throw new Error(
+          `Error. AmountInCents: ${amountInCents}. BalanceType: ${balanceType}`
+        );
+    }
+  };
 
   const {
     handleSubmit,
@@ -38,6 +63,10 @@ export const CreateExpenseForm: React.FC = () => {
 
   const handleCreateExpense = async (expenseData: StringInput) => {
     const amountInCents = convertStringtoCents(expenseData.value);
+
+    if (isInsufficient(amountInCents, expenseData.expenseType)) {
+      setInsufficientUi(true);
+    }
 
     let newExpense: Partial<Expense> = {
       description: expenseData.description,
@@ -67,11 +96,12 @@ export const CreateExpenseForm: React.FC = () => {
     }
   };
 
+  const insufficient = insufficientUi && "border-amber bg-sun";
+
   return !budgetId ? (
     "create a budget to start tracking expenses"
   ) : (
     <>
-      {isSuccess ? "Expense created" : error && "error"}
       <h3 className={responsiveHeader}>Create Expense</h3>
       <form
         id="createExpenseForm"
@@ -89,16 +119,8 @@ export const CreateExpenseForm: React.FC = () => {
           />
 
           <br />
-          <label htmlFor="value">Value</label>
-          <input
-            id="value"
-            type="number"
-            min="0"
-            {...register("value", {
-              required: "This field is required",
-            })}
-          />
-          {errors.value && <span>{errors.value.toString()}</span>}
+          <ValueInput name="value" register={register} errors={errors} />
+
           <br />
           {categoriesExist ? (
             <CategoriesDropdown
@@ -133,6 +155,27 @@ export const CreateExpenseForm: React.FC = () => {
           <Button buttonType="submit" buttonText="Create" />
         </div>
       </form>
+
+      <div className="flex space-x-4 bg-bg p-1 min-w-[90%] justify-evenly border border-navy rounded-xl shadow-lg">
+        <div className="flex items-center space-x-2">
+          <span className="font-medium">Checking:</span>
+          <span
+            className={`bg-white p-1 border rounded-md ${insufficient ?? "border-pale-steel"}`}
+          >
+            {checkingBalance && separateCents(checkingBalance)}
+          </span>
+        </div>
+
+        <div className="flex items-center space-x-2">
+          <span className="font-medium">Savings:</span>
+          <span
+            className={`bg-white p-1 border border-pale-steel rounded-md ${insufficient ?? "border-pale-steel"}`}
+          >
+            {(savingsBalance && separateCents(savingsBalance)) || "0.00"}
+          </span>
+        </div>
+      </div>
+      {isSuccess ? "Expense created" : error && <span>Not enough funds</span>}
     </>
   );
 };
