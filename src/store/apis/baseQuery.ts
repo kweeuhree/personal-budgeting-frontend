@@ -14,6 +14,8 @@ export const baseQueryWithCsrf = fetchBaseQuery({
       headers.set("X-CSRF-Token", csrfToken);
     }
     headers.set("Content-Type", "application/json");
+    console.log("Sending request with following headers:");
+    console.log(headers);
     return headers;
   },
   fetchFn: async (url, options) => {
