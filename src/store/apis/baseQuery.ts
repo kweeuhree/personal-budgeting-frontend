@@ -6,7 +6,7 @@ export const baseUrl = import.meta.env.VITE_BASE_URL;
 // fetch csrf token during log in and store in csrf slice
 export const baseQueryWithCsrf = fetchBaseQuery({
   baseUrl: `${baseUrl}/api/`,
-  // credentials: "include",
+  credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const state = getState() as RootState;
     const csrfToken = state.csrf.token; // Get CSRF token from the Redux state
