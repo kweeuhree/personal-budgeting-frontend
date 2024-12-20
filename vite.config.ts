@@ -8,12 +8,13 @@ export default defineConfig({
     https: {
       key: "./tls/key.pem",
       cert: "./tls/cert.pem",
+      // cert: "./tls/ca.pem",
     },
     proxy: {
       "/api": {
-        target: "https://localhost:4000",
+        target: "https://personal-budgeting-backend.onrender.com",
         changeOrigin: true,
-        secure: false,
+        secure: true,
       },
     },
   },
