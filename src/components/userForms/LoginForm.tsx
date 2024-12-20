@@ -63,6 +63,7 @@ export const LoginForm: React.FC = () => {
       }
       navigate("/budget");
     } catch (error) {
+      console.log(error);
       throw new Error(error instanceof Error ? error.message : "Unknown error");
     }
   };
