@@ -1,7 +1,14 @@
-import { fetchCsrfToken, setCsrfToken, useAppDispatch } from "../store";
+import {
+  fetchCsrfToken,
+  selectTokenStatus,
+  setCsrfToken,
+  useAppDispatch,
+  useAppSelector,
+} from "../store";
 
 export const useToken = () => {
   const dispatch = useAppDispatch();
+  const tokenStatus = useAppSelector(selectTokenStatus);
 
   const fetchToken = async () => {
     try {
@@ -13,5 +20,5 @@ export const useToken = () => {
     }
   };
 
-  return { fetchToken };
+  return { fetchToken, tokenStatus };
 };

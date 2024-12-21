@@ -35,12 +35,13 @@ const csrfSlice = createAppSlice({
   },
   selectors: {
     selectToken: (state) => state.token,
+    selectTokenStatus: (state) => state.status,
   },
 });
 
 export const { setCsrfToken, removeCsrfToken } = csrfSlice.actions;
 
-export const { selectToken } = csrfSlice.selectors;
+export const { selectToken, selectTokenStatus } = csrfSlice.selectors;
 
 export const csrfReducer = csrfSlice.reducer;
 

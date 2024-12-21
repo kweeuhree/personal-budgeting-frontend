@@ -11,23 +11,14 @@ import {
 import { UserLogIn } from "../../types";
 import { useRedirectBox, useToken } from "../../hooks";
 import { Button, Loading } from "..";
+import { NotFoundPage } from "../../pages";
 
 export const LoginForm: React.FC = () => {
-  const { fetchToken } = useToken();
+  const { fetchToken, tokenStatus } = useToken();
   const { formTitle } = useRedirectBox();
   const [login, { isLoading, error }] = useLoginMutation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
-  // const fetchToken = async () => {
-  //   try {
-  //     // destructure the token from dispatch action
-  //     const { payload: token } = await dispatch(fetchCsrfToken());
-  //     dispatch(setCsrfToken(token as string));
-  //   } catch (error) {
-  //     console.error("Failed to fetch CSRF token:", error);
-  //   }
-  // };
 
   const {
     register,
@@ -74,7 +65,7 @@ export const LoginForm: React.FC = () => {
   if (isLoading) {
     return <Loading />;
   } else if (error) {
-    <div>{error instanceof Error ? error.message : "Unknown error"}</div>;
+    return <NotFoundPage />;
   } else {
     return (
       <>
@@ -83,6 +74,9 @@ export const LoginForm: React.FC = () => {
           className="my-10"
           onSubmit={handleSubmit(onSubmit)}
         >
+          <div className={tokenStatus === "loading" ? "block" : "invisible"}>
+            {tokenStatus === "loading" && <Loading />}
+          </div>
           <div className="grid space-y-4">
             <label htmlFor="email">Email:</label>
             <input
