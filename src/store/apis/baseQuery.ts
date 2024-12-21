@@ -10,12 +10,15 @@ export const baseQueryWithCsrf = fetchBaseQuery({
   prepareHeaders: (headers, { getState }) => {
     const state = getState() as RootState;
     const csrfToken = state.csrf.token; // Get CSRF token from the Redux state
+    console.log("CSRF Token from Redux state:", state.csrf.token);
     if (csrfToken) {
       headers.set("X-CSRF-Token", csrfToken);
     }
     headers.set("Content-Type", "application/json");
     console.log("Sending request with following headers:");
-    console.log(headers);
+    headers.forEach((value, key) => {
+      console.log(`${key}: ${value}`);
+    });
     return headers;
   },
   fetchFn: async (url, options) => {
