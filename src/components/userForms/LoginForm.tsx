@@ -4,33 +4,30 @@ import { useForm, SubmitHandler } from "react-hook-form";
 
 import {
   budgetUpdate,
-  fetchCsrfToken,
-  setCsrfToken,
   useAppDispatch,
   useLoginMutation,
   userLogin,
 } from "../../store";
 import { UserLogIn } from "../../types";
-import { useRedirectBox } from "../../hooks";
+import { useRedirectBox, useToken } from "../../hooks";
 import { Button, Loading } from "..";
 
 export const LoginForm: React.FC = () => {
+  const { fetchToken } = useToken();
   const { formTitle } = useRedirectBox();
   const [login, { isLoading, error }] = useLoginMutation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  // const dispatch = useAppDispatch();
-
-  const fetchToken = async () => {
-    try {
-      // destructure the token from dispatch action
-      const { payload: token } = await dispatch(fetchCsrfToken());
-      dispatch(setCsrfToken(token as string));
-    } catch (error) {
-      console.error("Failed to fetch CSRF token:", error);
-    }
-  };
+  // const fetchToken = async () => {
+  //   try {
+  //     // destructure the token from dispatch action
+  //     const { payload: token } = await dispatch(fetchCsrfToken());
+  //     dispatch(setCsrfToken(token as string));
+  //   } catch (error) {
+  //     console.error("Failed to fetch CSRF token:", error);
+  //   }
+  // };
 
   const {
     register,

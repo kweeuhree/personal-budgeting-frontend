@@ -1,11 +1,12 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import { useSignupMutation } from "../../store";
-import { useRedirectBox } from "../../hooks";
+import { useRedirectBox, useToken } from "../../hooks";
 import { Button } from "../Button";
 import { UserSignUp } from "../../types";
 
 export const SignupForm: React.FC = () => {
+  const { fetchToken } = useToken();
   const { formTitle } = useRedirectBox();
   const [signup, { isSuccess, isError, error }] = useSignupMutation();
 
@@ -24,6 +25,7 @@ export const SignupForm: React.FC = () => {
   const password = watch("password");
 
   const handleSignup = async (userData: UserSignUp) => {
+    await fetchToken();
     try {
       await signup({
         email: userData.userEmail,
