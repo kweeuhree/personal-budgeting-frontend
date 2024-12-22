@@ -66,7 +66,7 @@ export const ProfilePage = () => {
         <h1>{greeting}</h1>
         {budgetId ? (
           <div className="flex flex-col gap-5 mb-2">
-            <div className="flex flex-col sm:hidden gap-5">
+            <div className="flex flex-col md:hidden gap-5">
               <NavLink className="content-center" to="/expenses">
                 <Button buttonText="View expenses" buttonType="button" />
               </NavLink>
