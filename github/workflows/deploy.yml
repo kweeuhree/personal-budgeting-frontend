@@ -1,0 +1,43 @@
+name: Build and Deploy to Go Server
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout React repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies and build React app
+        run: |
+          npm install
+          npm run build
+
+      - name: Clone Go server repository
+        run: |
+          git clone https://${{ secrets.GH_PAT }}@github.com/kweeuhree/personal-budgeting-backend personal-budgeting-backend
+
+      - name: Copy React build to Go server static folder
+        run: |
+          rm -rf personal-budgeting-backend/ui/static/*
+          cp -r dist/* personal-budgeting-backend/ui/static/
+
+      - name: Commit and push changes
+        run: |
+          cd personal-budgeting-backend
+
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add .
+          git diff --quiet && echo "No changes to commit" || git commit -m "Update static files from React app"
+          git push origin master
