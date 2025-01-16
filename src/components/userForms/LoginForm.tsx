@@ -62,7 +62,7 @@ export const LoginForm: React.FC = () => {
   };
 
   if (isLoading) {
-    return <Loading text="Connecting to remote server" />;
+    return <Loading />;
   } else if (error) {
     return <NotFoundPage />;
   } else {
@@ -74,7 +74,9 @@ export const LoginForm: React.FC = () => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className={tokenStatus === "loading" ? "block" : "invisible"}>
-            {tokenStatus === "loading" && <Loading />}
+            {tokenStatus === "loading" && (
+              <Loading text="Connecting to remote server" />
+            )}
           </div>
           <div className="grid space-y-4">
             <label htmlFor="email">Email:</label>
