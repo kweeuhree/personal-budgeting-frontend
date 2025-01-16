@@ -26,12 +26,9 @@ export const CreateCategoryForm = () => {
   };
 
   const handleCreateCategory = async (categoryData: StringInput) => {
-    console.log(categoryData);
     try {
       const newCategory = await categoryCreate(categoryData).unwrap();
       dispatch(createCategory(newCategory));
-      console.log("Created a category:");
-      console.log(newCategory);
 
       handleNavigate("/categories");
     } catch (error) {

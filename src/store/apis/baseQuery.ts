@@ -27,17 +27,6 @@ export const baseQueryWithCsrf = fetchBaseQuery({
 
     if (sessionCookie?.length) headers.set("session", sessionCookie);
 
-    console.log("Sending request with following headers:");
-    headers.forEach((value, key) => {
-      console.log(`${key}: ${value}`);
-    });
     return headers;
-  },
-  fetchFn: async (url, options) => {
-    console.log("Request URL:", url);
-    return fetch(url, options).then((response) => {
-      console.log("Response:", response);
-      return response;
-    });
   },
 });

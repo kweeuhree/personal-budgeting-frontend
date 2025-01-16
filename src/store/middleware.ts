@@ -18,7 +18,7 @@ import { resetStoreState } from "./actions";
 export const logger = createLogger({
   collapsed: true, // Collapse actions for better readability
   duration: true, // Log the duration of each action
-  timestamp: false, // Disable timestamps
+  timestamp: true, // Disable timestamps
   diff: true, // Show the state differences
 });
 
@@ -67,16 +67,8 @@ listenerMiddleware.startListening({
 listenerMiddleware.startListening({
   matcher: expenseApi.endpoints.expenseCreate.matchFulfilled,
   effect: async (action, { dispatch }) => {
-    console.log("attempting incrementing category expenses...");
     try {
       const { amountInCents, categoryId } = action.payload;
-      console.log("Action payload", action.payload);
-      console.log(
-        "updating for category",
-        categoryId,
-        " with amount:",
-        amountInCents
-      );
       if (categoryId) {
         dispatch(
           incrementCategoryExpenses({
@@ -99,13 +91,6 @@ listenerMiddleware.startListening({
   effect: async (action, { dispatch }) => {
     try {
       const { amountInCents, categoryId } = action.payload;
-      console.log("Action payload", action.payload);
-      console.log(
-        "updating for category",
-        categoryId,
-        " with amount:",
-        amountInCents
-      );
       if (categoryId) {
         dispatch(
           decrementCategoryExpenses({

@@ -18,7 +18,6 @@ export const SignupForm: React.FC = () => {
     formState: { errors },
   } = useForm<UserSignUp>();
   const onSubmit: SubmitHandler<UserSignUp> = (userData) => {
-    console.log(userData);
     handleSignup(userData);
   };
 

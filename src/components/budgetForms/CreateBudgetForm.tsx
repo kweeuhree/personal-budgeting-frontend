@@ -49,7 +49,6 @@ export const CreateBudgetForm: React.FC = () => {
       reset();
       navigate("/budget");
     } catch (error) {
-      console.log(typeof error);
       throw new Error(
         `Failed to create budget: ${error instanceof Error ? error.message : "Unknown error."}`
       );

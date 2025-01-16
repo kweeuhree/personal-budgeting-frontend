@@ -67,8 +67,6 @@ export const asyncBudgetUpdate = createAsyncThunk(
     ).unwrap();
 
     if (budget) {
-      console.log("Updating with budget:");
-      console.log(budget);
       dispatch(budgetUpdate(budget));
     }
   }

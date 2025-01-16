@@ -6,7 +6,6 @@ describe("Conversion utility functions", () => {
     const expected = "4.00";
     const input = 400;
     const result = separateCents(input);
-    console.log(result);
 
     expect(result).toBe(expected);
   });

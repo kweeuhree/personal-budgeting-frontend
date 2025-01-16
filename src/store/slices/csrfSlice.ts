@@ -46,7 +46,7 @@ export const { selectToken, selectTokenStatus } = csrfSlice.selectors;
 export const csrfReducer = csrfSlice.reducer;
 
 export const fetchCsrfToken = createAsyncThunk("csrf/fetchToken", async () => {
-  console.log("Attempting fetching token");
+  console.log("Connecting to remote server...");
   const response = await fetch(`${baseUrl}/api/csrf-token/`, {
     method: "GET",
     credentials: "include",
