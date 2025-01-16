@@ -19,10 +19,14 @@ const spinnerSVG = (
   </>
 );
 
-export const Loading: React.FC = () => {
+type Props = {
+  text?: string;
+};
+
+export const Loading: React.FC<Props> = ({ text = "Loading" }) => {
   return (
     <div className="flex justify-center items-center">
-      <p className="text-navy">Loading</p>
+      <p className="text-navy">{text}</p>
       &nbsp;
       {spinnerSVG}
     </div>

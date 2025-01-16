@@ -63,7 +63,7 @@ export const LoginForm: React.FC = () => {
   };
 
   if (isLoading) {
-    return <Loading />;
+    return <Loading text="Connecting to remote server" />;
   } else if (error) {
     return <NotFoundPage />;
   } else {
