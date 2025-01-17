@@ -11,6 +11,7 @@ export * from "./Expenses";
 export * from "./Loading";
 export * from "./ProtectedRoute";
 export * from "./ResponsiveTable";
+export * from "./Tooltip";
 export * from "./ValueInput";
 // forms
 export * from "./budgetForms";
