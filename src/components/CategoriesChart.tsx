@@ -4,7 +4,7 @@ import ApexCharts from "apexcharts";
 import { selectAllExpenses, selectCategories, useAppSelector } from "../store";
 import { getChartOptions, SAVINGS_BALANCE, CHECKING_BALANCE } from "../utils";
 import { useGroupedExpenses, useHandleNavigate } from "../hooks";
-import { Button } from "./Button";
+import { Button, Loading } from ".";
 
 interface RadioInput {
   id: string;
@@ -35,13 +35,16 @@ export const CategoriesChart = () => {
   const categories = useAppSelector(selectCategories);
   const { groupedSavings, groupedChecking } = useGroupedExpenses();
   const [selectedAccount, setSelectedAccount] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const totalSums = categories.map((cat) => cat.totalSum);
 
   useEffect(() => {
     if (donutRef.current && categories) {
+      setIsLoading(true);
       const chartOptions = getChartOptions(categories);
       const chart = new ApexCharts(donutRef.current, chartOptions);
+      setIsLoading(false);
       chart.render();
 
       const updateChart = () => {
@@ -81,27 +84,38 @@ export const CategoriesChart = () => {
     setSelectedAccount((prev) => (prev === value ? null : value));
   };
 
-  return expenses.length ? (
-    <div className="md:w-5/12 lg:w-5/12 sm:w-full flex flex-col items-center">
-      <div className="flex justify-center space-x-3">
-        {Object.entries(radioInputs).map(([label, { id, value }]) => (
-          <div key={id + "radio"} className="flex items-center space-x-1">
-            <input
-              id={id}
-              type="radio"
-              name="accountType"
-              value={value}
-              checked={selectedAccount === value}
-              onChange={handleChange}
-              className="w-4 h-4 border-amber accent-navy checked:bg-sun hover:bg-amber focus:ring-2 focus:ring-amber checked:hover:border-sun"
-            />
-            <label htmlFor={id + "radio"}>{label}</label>
-          </div>
-        ))}
+  const Chart = () => {
+    return (
+      <div className="md:w-5/12 lg:w-5/12 sm:w-full flex flex-col items-center">
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <>
+            <div className="flex justify-center space-x-3">
+              {Object.entries(radioInputs).map(([label, { id, value }]) => (
+                <div key={id + "radio"} className="flex items-center space-x-1">
+                  <input
+                    id={id}
+                    type="radio"
+                    name="accountType"
+                    value={value}
+                    checked={selectedAccount === value}
+                    onChange={handleChange}
+                    className="w-4 h-4 border-amber accent-navy checked:bg-sun hover:bg-amber focus:ring-2 focus:ring-amber checked:hover:border-sun"
+                  />
+                  <label htmlFor={id + "radio"}>{label}</label>
+                </div>
+              ))}
+            </div>
+            <div className="min-w-full" id="donut" ref={donutRef}></div>
+          </>
+        )}
       </div>
+    );
+  };
 
-      <div className="min-w-full" id="donut" ref={donutRef}></div>
-    </div>
+  return expenses.length ? (
+    <Chart />
   ) : (
     <Button
       buttonType="button"
