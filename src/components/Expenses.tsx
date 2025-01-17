@@ -1,8 +1,8 @@
 import { useAppSelector, selectCategories } from "../store";
 import { getCategoryName, separateCents } from "../utils";
-import { Button } from "./";
+import { Button, ResponsiveTable, Tooltip } from "./";
 import { Expense, type Expenses as ExpensesType } from "../types";
-import { ResponsiveTable } from "./ResponsiveTable";
+import { useTooltip } from "../hooks";
 
 const tableHeads = [
   "Amount",
@@ -23,7 +23,7 @@ export const Expenses: React.FC<Props> = ({
   expenses,
 }) => {
   const categories = useAppSelector(selectCategories);
-
+  const { isVisible, showTooltip, removeTooltip } = useTooltip({});
   const getTableData = (expenses: ExpensesType) => {
     return expenses.map((exp) => {
       const {
@@ -48,11 +48,20 @@ export const Expenses: React.FC<Props> = ({
           Account: account,
           CreationTime: creationTime,
           Button: (
-            <Button
-              buttonText="&#9249;"
-              buttonType="submit"
-              onClick={() => handleConfirmDelete(exp, amountInDollars)}
-            />
+            <div onMouseLeave={() => removeTooltip(expenseId)}>
+              <Button
+                data-tooltip-target={`tooltip-${expenseId}`}
+                buttonText="&#9249;"
+                buttonType="submit"
+                onMouseEnter={() => showTooltip(expenseId)}
+                onClick={() => handleConfirmDelete(exp, amountInDollars)}
+              />
+              <Tooltip
+                id={`tooltip-${expenseId}`}
+                text="Delete expense"
+                isVisible={isVisible[expenseId]}
+              />
+            </div>
           ),
         },
       };
