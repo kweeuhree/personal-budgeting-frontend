@@ -27,7 +27,10 @@ export const Categories: React.FC<Props> = ({
           Description: description || <span>--</span>,
           TotalSum: totalSum > 0 ? separateCents(totalSum) : totalSum,
           Button: (
-            <div onMouseLeave={() => removeTooltip(expenseCategoryId)}>
+            <div
+              className="relative"
+              onMouseLeave={() => removeTooltip(expenseCategoryId)}
+            >
               <Button
                 data-tooltip-target={`tooltip-${expenseCategoryId}`}
                 buttonText="&#9249;"

@@ -1,8 +1,9 @@
 import { useAppSelector, selectCategories } from "../store";
-import { getCategoryName, separateCents } from "../utils";
-import { Button, ResponsiveTable, Tooltip } from "./";
-import { Expense, type Expenses as ExpensesType } from "../types";
 import { useTooltip } from "../hooks";
+import { getCategoryName, separateCents } from "../utils";
+
+import { Expense, type Expenses as ExpensesType } from "../types";
+import { Button, ResponsiveTable, Tooltip } from ".";
 
 const tableHeads = [
   "Amount",
@@ -48,7 +49,10 @@ export const Expenses: React.FC<Props> = ({
           Account: account,
           CreationTime: creationTime,
           Button: (
-            <div onMouseLeave={() => removeTooltip(expenseId)}>
+            <div
+              className="relative"
+              onMouseLeave={() => removeTooltip(expenseId)}
+            >
               <Button
                 data-tooltip-target={`tooltip-${expenseId}`}
                 buttonText="&#9249;"
