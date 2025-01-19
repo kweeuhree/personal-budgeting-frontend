@@ -11,7 +11,7 @@ export const Tooltip: React.FC<Props> = ({ id, text, isVisible }) => {
     <div
       id={id}
       role="tooltip"
-      className={`absolute z-10 ${visible} inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm tooltip dark:bg-gray-700`}
+      className={`absolute ${visible} left-1/2 transform mb-1 -translate-x-1/2 bottom-full inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm tooltip dark:bg-gray-700`}
     >
       {text}
       <div className="tooltip-arrow" data-popper-arrow></div>
