@@ -29,7 +29,7 @@ jobs:
 
       - name: Clone Go server repository
         run: |
-          git clone https://${{ secrets.GH_PAT }}@github.com/kweeuhree/personal-budgeting-backend personal-budgeting-backend
+          git clone https://x-access-token:${{ secrets.GH_PAT }}@github.com/kweeuhree/personal-budgeting-backend personal-budgeting-backend
 
       - name: Copy React build to Go server static folder
         run: |
