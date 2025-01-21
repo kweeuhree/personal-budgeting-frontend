@@ -3,8 +3,8 @@ import ApexCharts from "apexcharts";
 
 import { selectAllExpenses, selectCategories, useAppSelector } from "../store";
 import { getChartOptions, SAVINGS_BALANCE, CHECKING_BALANCE } from "../utils";
-import { useGroupedExpenses, useHandleNavigate, useTooltip } from "../hooks";
-import { Button, Loading, Tooltip } from ".";
+import { useGroupedExpenses, useHandleNavigate } from "../hooks";
+import { Button } from ".";
 
 interface RadioInput {
   id: string;
@@ -30,22 +30,18 @@ const radioInputs: RadioInputs = {
 
 export const CategoriesChart: React.FC = () => {
   const { handleNavigate } = useHandleNavigate();
-  const { isVisible, showTooltip, removeTooltip } = useTooltip({});
   const donutRef = useRef<HTMLDivElement | null>(null);
   const expenses = useAppSelector(selectAllExpenses);
   const categories = useAppSelector(selectCategories);
   const { groupedSavings, groupedChecking } = useGroupedExpenses();
   const [selectedAccount, setSelectedAccount] = useState<string | null>(null);
-  // const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const totalSums = categories.map((cat) => cat.totalSum);
 
   useEffect(() => {
     if (donutRef.current && categories) {
-      // setIsLoading(true);
       const chartOptions = getChartOptions(categories);
       const chart = new ApexCharts(donutRef.current, chartOptions);
-      // setIsLoading(false);
       chart.render();
 
       const updateChart = () => {
@@ -101,11 +97,6 @@ export const CategoriesChart: React.FC = () => {
                 className="w-4 h-4 border-amber accent-navy checked:bg-sun hover:bg-amber focus:ring-2 focus:ring-amber checked:hover:border-sun"
               />
               <label htmlFor={id + "radio"}>{label}</label>
-              <Tooltip
-                id={`tooltip-${id}`}
-                text={`View ${id} expenses`}
-                isVisible={isVisible[id]}
-              />
             </div>
           ))}
         </div>
