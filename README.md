@@ -2,7 +2,14 @@
 
 A **React + TypeScript** application powered by **Vite**, designed for managing personal budgets. The app provides comprehensive CRUD operations for users, budgets, expenses, and expense categories. Authentication is handled via **CSRF tokens**, with a backend implemented in **Go**.
 
----
+The repository containing the backend of the application can be found here: [Go backend repository](https://personal-budgeting-backend.onrender.com/)
+
+## 🚀 Screenshots
+
+<p align="center">
+<img src="https://github.com/kweeuhree/personal-budgeting-frontend/blob/master/src/assets/budget.png?raw=true" alt="Budget Page" width="600" />
+<img src="https://github.com/kweeuhree/personal-budgeting-frontend/blob/master/src/assets/budget.png?raw=true" alt="Expenses Page" width="600" />
+</p>
 
 ## 🚀 Features
 
