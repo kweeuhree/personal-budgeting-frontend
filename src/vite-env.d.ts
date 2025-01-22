@@ -1,5 +1,6 @@
 /// <reference types="vite/client" />
-declare module "*.module.css";
+declare module "*.css";
+declare module "redux-logger";
 
 interface ImportMetaEnv {
   VITE_BASE_URL: string;
