@@ -9,7 +9,6 @@ export default defineConfig({
     https: {
       key: "./tls/key.pem",
       cert: "./tls/cert.pem",
-      // cert: "./tls/ca.pem",
     },
     proxy: {
       "/api": {
