@@ -12,6 +12,7 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
+    "typeRoots": ["node_modules"],
     "types": ["vitest/globals"],
 
     /* Linting */
