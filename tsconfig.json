@@ -12,12 +12,7 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["node", "vite"],
-    "typeRoots": [
-      "./node_modules/@types",
-      "../node_modules/@types",
-      "../../node_modules/@types"
-    ],
+    "types": ["vitest/globals"],
 
     /* Linting */
     "strict": true,

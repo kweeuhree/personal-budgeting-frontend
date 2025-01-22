@@ -19,7 +19,7 @@ export default defineConfig({
     },
   },
   css: {
-    postcss: "./postcss.config.js",
+    postcss: "./postcss.config.cjs",
   },
   test: {
     globals: true, // Use global test functions (e.g., `describe`, `it`)
