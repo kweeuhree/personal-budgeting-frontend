@@ -1,3 +1,4 @@
+/// <reference types="vite" />
 /// <reference types="vitest/globals" />
 
 declare module "react-dom/client";
