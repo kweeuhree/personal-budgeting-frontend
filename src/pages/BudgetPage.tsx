@@ -11,6 +11,7 @@ export const BudgetPage = () => {
   const formattedBudget = formatBudget(budget);
 
   const handleUpdateBalance = (balanceType: string) => {
+    console.log("I clicked");
     setFormProps({ balanceType });
     setEditMode(true);
   };

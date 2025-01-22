@@ -56,7 +56,7 @@ export const Expenses: React.FC<Props> = ({
               <Button
                 data-tooltip-target={`tooltip-${expenseId}`}
                 buttonText="&#9249;"
-                buttonType="submit"
+                buttonType="button"
                 onMouseEnter={() => showTooltip(expenseId)}
                 onClick={() => handleConfirmDelete(exp, amountInDollars)}
               />
