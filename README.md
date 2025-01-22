@@ -8,18 +8,18 @@ The repository containing the backend of the application can be found here: [Go 
 
 <p align="center">
 <img src="https://github.com/kweeuhree/personal-budgeting-frontend/blob/master/src/assets/budget.png?raw=true" alt="Budget Page" width="600" />
-<img src="https://github.com/kweeuhree/personal-budgeting-frontend/blob/master/src/assets/budget.png?raw=true" alt="Expenses Page" width="600" />
+<img src="https://github.com/kweeuhree/personal-budgeting-frontend/blob/master/src/assets/expenses.png?raw=true" alt="Expenses Page" width="600" />
 </p>
 
 ## 🚀 Features
 
 - **CRUD Operations**:
   - User management
-  - Budgets: Create, update, delete, and view budgets
-  - Expenses: Add, update, view, and delete expenses
+  - Budget: Create, update, delete, and view budget
+  - Expenses: Add, view, and delete expenses
   - Expense Categories: Categorize and manage expense categories
 - **User Authentication**:
-  - Secure login and signup using CSRF tokens
+  - Secure login and signup using CSRF tokens and hashed passwords
 - **Modern Frontend**:
   - Built with React and TypeScript for scalability and type safety
   - Vite for a fast and optimized development experience
@@ -31,7 +31,7 @@ The repository containing the backend of the application can be found here: [Go 
 - **Budget Summary**:
   - A detailed summary for each budget, including visualizations.
 - **Data Visualization**:
-  - Integration of a **pie chart** to provide an intuitive overview of budget distributions and spending.
+  - [x] Integration of a **pie chart** to provide an intuitive overview of budget distributions and spending.
 
 ---
 
@@ -45,7 +45,8 @@ The repository containing the backend of the application can be found here: [Go 
 
 ### Backend
 
-- **Go**: Backend server handling authentication and data operations
+- **Go**: Backend server handling authentication and data operationsGH_PAT
+- **MySQL Solution**: MySQL instance is hosted on Aiven Cloud
 - **CSRF Tokens**: Secure user authentication mechanism
 
 ---
