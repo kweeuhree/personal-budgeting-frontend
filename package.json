@@ -11,6 +11,7 @@
     "test": "vitest"
   },
   "dependencies": {
+    "vite": "^5.4.14",
     "@reduxjs/toolkit": "^2.3.0",
     "apexcharts": "^4.1.0",
     "dotenv": "^16.4.5",
