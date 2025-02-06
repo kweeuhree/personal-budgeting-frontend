@@ -23,6 +23,11 @@ The repository containing the backend of the application can be found here: [Go 
 - **Modern Frontend**:
   - Built with React and TypeScript for scalability and type safety
   - Vite for a fast and optimized development experience
+  - ApexCharts and Tailwind for better user experience
+
+---
+
+## ▶️ Usage
 
 ---
 
@@ -30,8 +35,6 @@ The repository containing the backend of the application can be found here: [Go 
 
 - **Budget Summary**:
   - A detailed summary for each budget, including visualizations.
-- **Data Visualization**:
-  - [x] Integration of a **pie chart** to provide an intuitive overview of budget distributions and spending.
 
 ---
 
@@ -58,10 +61,11 @@ The project is organized for maintainability and scalability:
 ```plaintext
 src/
 ├── components/       # Reusable UI components
-├── features/         # Feature-specific modules (e.g., budgets, expenses)
 ├── hooks/            # Custom React hooks
+├── layouts/          # Different page layouts for authorized and unauthorized access
 ├── pages/            # Page-level components for routing
-├── services/         # API interaction and backend integration
+├── store/            # State management with Redux and API interaction
 ├── styles/           # Global and shared styles
+├── types/            # Type declarations
 ├── utils/            # Shared utility functions
 ```
