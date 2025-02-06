@@ -42,7 +42,7 @@ The repository containing the backend of the application can be found here: [Go 
 ## ▶️ Usage
 
 - Sign up with your credentials or login with test credentials:
-- Email: nika@gmail.com
+  Email: nika@gmail.com
   Password: qwerty12345
 
 - Await for the remote server to spin up (may take for up to 60 seconds);
