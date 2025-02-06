@@ -64,22 +64,22 @@ The repository containing the backend of the application can be found here: [Go 
 ## 😃 Features I am excited about
 
 - **Custom tooltips with Tailwind and vanilla JavaScript**
-Accessibility is important, and this project features responsive tooltips for better user experience.
-<p align="center">
-<img src="https://github.com/kweeuhree/personal-budgeting-frontend/blob/master/src/assets/tooltip.png?raw=true" alt="Custom tooltip picture" width="200" />
-</p>
+- Accessibility is important, and this project features responsive tooltips for better user experience.
+  <p align="center">
+  <img src="https://github.com/kweeuhree/personal-budgeting-frontend/blob/master/src/assets/tooltip.png?raw=true" alt="Custom tooltip picture" width="200" />
+  </p>
 
 - **Custom confirm window with focus trap**
-Default confirm window is underwhelming, and this project features custom confirm windows that trap focus to satisfy accessibility requirements.
-<p align="center">
-<img src="https://github.com/kweeuhree/personal-budgeting-frontend/blob/master/src/assets/confirm.png?raw=true" alt="Custom confirm dialog" width="400" />
-</p>
+- Default confirm window is underwhelming, and this project features custom confirm windows that trap focus to satisfy accessibility requirements.
+  <p align="center">
+  <img src="https://github.com/kweeuhree/personal-budgeting-frontend/blob/master/src/assets/confirm.png?raw=true" alt="Custom confirm dialog" width="400" />
+  </p>
 
 - **ResponsiveTable component**
-  Responsive table component standardizes how Categories and Expenses are displayed. The Responsive table component will display both tables in the same fashion and simply gets injected with relevant information.
+- Responsive table component standardizes how Categories and Expenses are displayed. The Responsive table component will display both tables in the same fashion and simply gets injected with relevant information.
 
 - **User authorization with CSRF tokens**
-  Security is vital when finances are concerned. CSRF tokens ensure integrity of user data.
+- Security is vital when finances are concerned. CSRF tokens ensure integrity of user data.
 
 ---
 
