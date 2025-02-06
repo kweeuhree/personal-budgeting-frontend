@@ -27,7 +27,28 @@ The repository containing the backend of the application can be found here: [Go 
 
 ---
 
+## 🖥️ Run the Program
+
+- Install Node and npm locally;
+- Clone or fork this repository;
+- In the project folder, run the following command:
+
+```bash
+ npm run dev
+```
+
+---
+
 ## ▶️ Usage
+
+- Sign up with your credentials or login with test credentials:
+  Email: nika@gmail.com
+  Password: qwerty12345
+- Await for the remote server to spin up (may take for up to 60 seconds);
+- Navigate to 'Create expense+' to create an expense;
+- Navigate to 'View expenses' to view all expenses;
+- Navigate to 'View categories' to view categories or create a new category;
+- Navigate to 'Profile' to reset the budget.
 
 ---
 
@@ -35,6 +56,28 @@ The repository containing the backend of the application can be found here: [Go 
 
 - **Budget Summary**:
   - A detailed summary for each budget, including visualizations.
+
+---
+
+## 😃 Features I am excited about
+
+- **Custom tooltips with Tailwind and vanilla JavaScript**
+Accessibility is important, and this project features responsive tooltips for better user experience.
+<p align="center">
+<img src="https://github.com/kweeuhree/personal-budgeting-frontend/blob/master/src/assets/tooltip.png?raw=true" alt="Custom tooltip picture" width="200" />
+</p>
+
+- **Custom confirm window with focus trap**
+Default confirm window is underwhelming, and this project features custom confirm windows that trap focus to satisfy accessibility requirements.
+<p align="center">
+<img src="https://github.com/kweeuhree/personal-budgeting-frontend/blob/master/src/assets/confirm.png?raw=true" alt="Custom confirm dialog" width="400" />
+</p>
+
+- **ResponsiveTable component**
+  Responsive table component standardizes how Categories and Expenses are displayed. The Responsive table component will display both tables in the same fashion and simply gets injected with relevant information.
+
+- **User authorization with CSRF tokens**
+  Security is vital when finances are concerned. CSRF tokens ensure integrity of user data.
 
 ---
 
