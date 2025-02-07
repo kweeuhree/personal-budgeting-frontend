@@ -7,7 +7,7 @@ import {
 import { setupListeners } from "@reduxjs/toolkit/query";
 
 import { authApi, budgetApi, expenseApi, categoryApi } from "./apis";
-import { logger, listenerMiddleware } from "./middleware";
+import { listenerMiddleware } from "./middleware";
 import {
   userReducer,
   csrfReducer,
@@ -39,7 +39,6 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
     // and other useful features of `rtk-query`.
     middleware: (getDefaultMiddleware) => {
       return getDefaultMiddleware()
-        .concat(logger)
         .concat(authApi.middleware)
         .concat(budgetApi.middleware)
         .concat(expenseApi.middleware)

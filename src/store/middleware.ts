@@ -1,5 +1,4 @@
 import { createListenerMiddleware } from "@reduxjs/toolkit";
-import { createLogger } from "redux-logger";
 
 import { categoryApi, expenseApi, authApi } from "./apis";
 import {
@@ -14,13 +13,6 @@ import {
   clearAllTotalSums,
 } from "./slices";
 import { resetStoreState } from "./actions";
-
-export const logger = createLogger({
-  collapsed: true, // Collapse actions for better readability
-  duration: true, // Log the duration of each action
-  timestamp: true, // Disable timestamps
-  diff: true, // Show the state differences
-});
 
 export const listenerMiddleware = createListenerMiddleware();
 // Listen for a successful login
