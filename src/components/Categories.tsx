@@ -40,7 +40,7 @@ export const Categories: React.FC<Props> = ({
               />
               <Tooltip
                 id={`tooltip-${expenseCategoryId}`}
-                text="Delete expense"
+                text="Delete category"
                 isVisible={isVisible[expenseCategoryId]}
               />
             </div>
